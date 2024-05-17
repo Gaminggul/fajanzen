@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="8.3597644"
+     inkscape:cx="15.670298"
+     inkscape:cy="56.999214"
+     inkscape:window-width="3440"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="M 1.5143197,50.173882 19.61,9.6538583 23.662354,9.6264583 42.000303,50.219895 35.663368,50.212695 21.793738,18.160141 7.851256,50.181065 Z"
+       id="text1"
+       style="font-size:400px;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.180251"
+       aria-label="&lt;"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       d="M 35.676318,50.188616 17.342055,9.6269413 l 6.369172,0.0052 14.096616,31.9533677 13.71502,-32.1190107 6.306336,0.06899 -17.787511,40.6269457 z"
+       id="text2"
+       style="font-size:400px;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;stroke-width:0.180251"
+       aria-label="&gt;"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#0000ff;stroke-width:0.0609857"
+       d="m 51.576705,48.819961 v -1.463653 h 3.62865 3.62865 V 29.913077 12.469847 l -1.171339,0.01658 -1.171339,0.01658 -7.768247,17.742489 -7.768249,17.742489 0.275926,0.614213 c 0.15176,0.337809 0.372948,0.826895 0.491528,1.086843 l 0.215599,0.472642 h -3.128262 -3.128263 l -0.69808,-1.570377 C 33.258151,44.710511 21.5375,18.816628 21.505681,18.815874 21.486151,18.815336 18.399026,25.868026 14.645473,34.48836 L 7.8208263,50.161686 H 4.6938082 1.5667901 l 0.083908,-0.198204 c 0.046138,-0.109011 3.8624718,-8.657947 8.4807229,-18.997629 l 8.396815,-18.799426 -0.528593,-1.173394 c -0.290726,-0.645365 -0.541957,-1.2076977 -0.558289,-1.2496227 -0.02353,-0.06036 0.622465,-0.07623 3.106989,-0.07623 h 3.136685 l 1.431853,3.2169967 c 0.787522,1.769348 3.995147,8.891746 7.128059,15.827553 5.084826,11.257067 5.703786,12.595645 5.766864,12.471579 0.03886,-0.07644 3.097679,-7.233145 6.797369,-15.903787 3.699691,-8.670643 6.73036,-15.7707047 6.73482,-15.7779137 0.0045,-0.0072 2.442402,0.0039 5.417647,0.02524 l 5.409536,0.03834 V 29.924455 50.28372 H 56.97394 51.576705 Z"
+       id="path8" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.09494px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#00aa88;stroke-width:0.0177373"
+       x="33.922607"
+       y="59.518055"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         x="33.922607"
+         y="59.518055"
+         style="fill:#00aa88;stroke-width:0.0177373">fajanzen.de</tspan></text>
+  </g>
+</svg>

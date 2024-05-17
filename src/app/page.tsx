@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { FaReact, FaHtml5, FaCss3Alt, FaPython, FaJava, FaRust, FaEnvelope, FaTwitter, FaGithub } from 'react-icons/fa';
 import { SiDart, SiTypescript, SiJavascript, SiCsharp } from 'react-icons/si';
