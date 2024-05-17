@@ -76,16 +76,16 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="bg-blue-600 py-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold text-white">
+        <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
+          <a href="/" className="text-2xl font-bold text-white hidden md:flex">
             fajanzen.de
           </a>
-          <nav>
+          <nav className="flex justify-evenly gap-0 md:gap-6">
             <Link
               to="about"
               smooth={true}
               duration={500}
-              className="mx-4 text-white hover:underline cursor-pointer"
+              className="text-white hover:underline cursor-pointer"
             >
               Über Mich
             </Link>
@@ -93,7 +93,7 @@ const App: React.FC = () => {
               to="skills"
               smooth={true}
               duration={500}
-              className="mx-4 text-white hover:underline cursor-pointer"
+              className="text-white hover:underline cursor-pointer"
             >
               Skills
             </Link>
@@ -101,7 +101,7 @@ const App: React.FC = () => {
               to="projects"
               smooth={true}
               duration={500}
-              className="mx-4 text-white hover:underline cursor-pointer"
+              className="text-white hover:underline cursor-pointer"
             >
               Projekte
             </Link>
@@ -109,7 +109,7 @@ const App: React.FC = () => {
               to="contact"
               smooth={true}
               duration={500}
-              className="mx-4 text-white hover:underline cursor-pointer"
+              className="text-white hover:underline cursor-pointer"
             >
               Kontakt
             </Link>
