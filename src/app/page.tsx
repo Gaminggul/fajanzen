@@ -119,7 +119,7 @@ const App: React.FC = () => {
 
       <main className="relative overflow-hidden h-[50vh] flex items-center justify-center text-center">
         <div className="absolute inset-0 stars-background">
-          {[...Array(600)].map((_, i) => {
+          {[...Array(300)].map((_, i) => {
             const speed = Math.random() * 2 + 2;
             return <div
               key={i}
