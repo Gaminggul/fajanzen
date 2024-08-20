@@ -145,7 +145,7 @@ const App: React.FC = () => {
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">Über Mich</h2>
           <p className="text-center max-w-2xl mx-auto">
-            Hey, mein Name ist Noel Janzen. Zurzeit mache ich mein Abitur.
+            Hey, mein Name ist Noel Janzen. Zurzeit mache ich mein Duales Studium im Bereich Informatik.
           </p>
           <div className="text-center max-w-2xl mx-auto mt-4">
             <p>
