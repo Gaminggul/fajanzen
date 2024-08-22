@@ -1,7 +1,7 @@
 # njwebsite
 
 ## Overview
-`njwebsite` is a web development project built using the Create React App. This repository is aimed at providing a structured and feature-ready foundation for a React application. It integrates various modern development tools and adheres to best practices for development and deployment.
+`njwebsite` is a web development project built using the Create React App. This repository is aimed to show my skill in coding a react based web application.
 
 ## Features
 - **TypeScript**: A robust setup featuring 83% TypeScript for type safety and enhanced editor support.
