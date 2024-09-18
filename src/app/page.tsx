@@ -14,6 +14,7 @@ import {
 import { SiDart, SiTypescript, SiJavascript, SiCsharp } from "react-icons/si";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-scroll";
+import { Helmet } from 'react-helmet';
 
 const skills = [
   { icon: FaReact, name: "React" },
@@ -75,6 +76,20 @@ const contacts = [
 const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
+    <Helmet>
+        <title>Noel Janzen Portfolio</title>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@gaminggul1" />
+        <meta name="twitter:title" content="Noel Janzen Portfolio" />
+        <meta
+          name="twitter:description"
+          content="Willkommen auf der Portfolio-Seite von Noel Janzen."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.deineseite.de/images/portfolio-banner.jpg"
+        />
+      </Helmet>
       <header className="bg-blue-600 py-4 shadow-md">
         <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
           <a href="/" className="text-2xl font-bold text-white hidden md:flex">
