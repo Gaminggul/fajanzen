@@ -93,6 +93,7 @@ const App: React.FC = () => {
       </Helmet>
       <header className="bg-blue-600 py-4 shadow-md">
         <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
+          <SpeedInsights />
           <a href="/" className="text-2xl font-bold text-white hidden md:flex">
             fajanzen.de
           </a>
