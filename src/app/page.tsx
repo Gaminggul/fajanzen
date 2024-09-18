@@ -15,6 +15,7 @@ import { SiDart, SiTypescript, SiJavascript, SiCsharp } from "react-icons/si";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-scroll";
 import { Helmet } from 'react-helmet';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const skills = [
   { icon: FaReact, name: "React" },
