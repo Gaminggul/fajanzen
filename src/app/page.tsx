@@ -79,7 +79,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-black text-white">
     <Helmet>
         <title>Noel Janzen Portfolio</title>
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@gaminggul1" />
         <meta name="twitter:title" content="Noel Janzen Portfolio" />
         <meta
@@ -88,7 +88,7 @@ const App: React.FC = () => {
         />
         <meta
           name="twitter:image"
-          content="https://www.deineseite.de/images/portfolio-banner.jpg"
+          content="https://www.fajanzen.de/favicon.png"
         />
       </Helmet>
       <header className="bg-blue-600 py-4 shadow-md">
