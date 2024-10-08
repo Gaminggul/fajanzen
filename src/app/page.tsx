@@ -3,7 +3,6 @@ import React from "react";
 import {
   FaReact,
   FaHtml5,
-  FaCss3Alt,
   FaPython,
   FaJava,
   FaRust,
@@ -180,6 +179,7 @@ const App: React.FC = () => {
                 <li>🤿 Tauchen</li>
                 <li>🧗‍♂️ Bouldern</li>
                 <li>⛳ Golfen</li>
+                <li>Angeln</li>
                 <li>💻 Programmieren</li>
               </ul>
             </div>
@@ -234,7 +234,7 @@ const App: React.FC = () => {
             <div className="bg-gray-800 text-white p-4 rounded shadow-lg">
               <h3 className="text-xl font-bold">Angsthase</h3>
               <p className="mb-4">
-                Eine Partyapp mit den Fragen vom Kartenspiel Angsthase.
+                Eine Partyapp mit den Fragen vom Kartenspiel "Angsthase".
               </p>
               <a
                 href="https://github.com/Gaminggul/angsthase"
