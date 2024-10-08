@@ -11,6 +11,7 @@ import {
   FaTwitter,
   FaGithub,
 } from "react-icons/fa";
+import { SiCplusplus } from "react-icons/si";
 import { SiDart, SiTypescript, SiJavascript, SiCsharp } from "react-icons/si";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-scroll";
@@ -27,6 +28,7 @@ const skills = [
   { icon: FaJava, name: "Java" },
   { icon: SiCsharp, name: "C#" },
   { icon: FaRust, name: "Rust" },
+  { icon: SiCplusplus, name: "C++" },
 ];
 
 const projects = [
