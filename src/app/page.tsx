@@ -178,7 +178,6 @@ const App: React.FC = () => {
                 <li>🎮 Gaming</li>
                 <li>🤿 Tauchen</li>
                 <li>🧗‍♂️ Bouldern</li>
-                <li>⛳ Golfen</li>
                 <li>🎣 Angeln</li>
                 <li>💻 Programmieren</li>
               </ul>
