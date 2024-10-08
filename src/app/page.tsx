@@ -215,63 +215,90 @@ const App: React.FC = () => {
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">Projekte</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg">
-              <h3 className="text-xl font-bold">Portfolio Website</h3>
-              <p className="mb-4">
-                Meine persönliche Portfolio-Website, die meine Fähigkeiten und
-                Projekte zeigt.
-              </p>
-              <a
-                href="https://github.com/Gaminggul/njwebsite"
-                className="text-blue-400 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold mb-2">Portfolio Website</h3>
+                <p className="mb-4">
+                  Meine persönliche Portfolio-Website, die meine Fähigkeiten und
+                  Projekte zeigt.
+                </p>
+              </div>
+              <div className="mt-auto flex justify-between items-center">
+                <a
+                  href="https://github.com/Gaminggul/njwebsite"
+                  className="text-blue-400 hover:text-red-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://fajanzen.de"
+                  className="text-blue-400 hover:text-red-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Öffnet die Website
+                </a>
+              </div>
             </div>
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg">
-              <h3 className="text-xl font-bold">Angsthase</h3>
-              <p className="mb-4">
-                Eine Partyapp mit den Fragen vom Kartenspiel "Angsthase".
-              </p>
-              <a
-                href="https://github.com/Gaminggul/angsthase"
-                className="text-blue-400 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+
+            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold mb-2">Angsthase</h3>
+                <p className="mb-4">
+                  Eine Partyapp mit den Fragen vom Kartenspiel "Angsthase".
+                </p>
+              </div>
+              <div className="mt-auto flex justify-between items-center">
+                <a
+                  href="https://github.com/Gaminggul/angsthase"
+                  className="text-blue-400 hover:text-red-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </div>
             </div>
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg">
-              <h3 className="text-xl font-bold">PokerCats</h3>
-              <p className="mb-4">
-                Ein webbasiertes Pokerspiel namens PokerCats.
-              </p>
-              <a
-                href="https://github.com/Gaminggul/PokerOnline"
-                className="text-blue-400 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+
+            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold mb-2">PokerCats</h3>
+                <p className="mb-4">
+                  Ein webbasiertes Pokerspiel namens PokerCats.
+                </p>
+              </div>
+              <div className="mt-auto flex justify-between items-center">
+                <a
+                  href="https://github.com/Gaminggul/PokerOnline"
+                  className="text-blue-400 hover:text-red-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </div>
             </div>
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg md:col-start-2 md:col-end-4 lg:col-start-2 lg:col-end-3">
-              <h3 className="text-xl font-bold">KnowUnity-PDF-Downloader</h3>
-              <p className="mb-4">
-                Eine Chrome-Erweiterung zum Herunterladen von PDFs von
-                KnowUnity.
-              </p>
-              <a
-                href="https://github.com/Gaminggul/KnowUnity-PDF-Downloader"
-                className="text-blue-400 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+
+            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full md:col-span-2 lg:col-span-1">
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold mb-2">KnowUnity-PDF-Downloader</h3>
+                <p className="mb-4">
+                  Eine Chrome-Erweiterung zum Herunterladen von PDFs von
+                  KnowUnity.
+                </p>
+              </div>
+              <div className="mt-auto flex justify-between items-center">
+                <a
+                  href="https://github.com/Gaminggul/KnowUnity-PDF-Downloader"
+                  className="text-blue-400 hover:text-red-600"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
         </div>
