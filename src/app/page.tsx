@@ -179,7 +179,7 @@ const App: React.FC = () => {
                 <li>🤿 Tauchen</li>
                 <li>🧗‍♂️ Bouldern</li>
                 <li>⛳ Golfen</li>
-                <li>Angeln</li>
+                <li>🎣 Angeln</li>
                 <li>💻 Programmieren</li>
               </ul>
             </div>
