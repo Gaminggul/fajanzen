@@ -14,7 +14,7 @@ import { SiCplusplus } from "react-icons/si";
 import { SiDart, SiTypescript, SiJavascript, SiCsharp } from "react-icons/si";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-scroll";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const skills = [
@@ -28,35 +28,6 @@ const skills = [
   { icon: SiCsharp, name: "C#" },
   { icon: FaRust, name: "Rust" },
   { icon: SiCplusplus, name: "C++" },
-];
-
-const projects = [
-  {
-    title: "Portfolio Website",
-    description:
-      "Meine persönliche Portfolio-Website, die meine Fähigkeiten und Projekte zeigt.",
-    githubLink: "https://github.com/Gaminggul/njwebsite",
-    liveDemoLink: "#",
-  },
-  {
-    title: "Angsthase",
-    description: "Eine Partyapp mit den Fragen vom Kartenspiel Angsthase.",
-    githubLink: "https://github.com/Gaminggul/angsthase",
-    liveDemoLink: "#",
-  },
-  {
-    title: "KnowUnity-PDF-Downloader",
-    description:
-      "Eine Chrome-Erweiterung zum Herunterladen von PDFs von KnowUnity.",
-    githubLink: "https://github.com/Gaminggul/KnowUnity-PDF-Downloader",
-    liveDemoLink: "#",
-  },
-  {
-    title: "PokerCats",
-    description: "Ein webbasiertes Pokerspiel namens PokerCats.",
-    githubLink: "https://github.com/Gaminggul/PokerOnline",
-    liveDemoLink: "#",
-  },
 ];
 
 const contacts = [
@@ -78,7 +49,7 @@ const contacts = [
 const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
-    <Helmet>
+      <Helmet>
         <title>Noel Janzen Portfolio</title>
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@gaminggul1" />
@@ -92,6 +63,8 @@ const App: React.FC = () => {
           content="https://www.fajanzen.de/favicon.png"
         />
       </Helmet>
+
+      {/* Header */}
       <header className="bg-blue-600 py-4 shadow-md">
         <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
           <SpeedInsights />
@@ -106,6 +79,15 @@ const App: React.FC = () => {
               className="text-white hover:underline cursor-pointer"
             >
               Über Mich
+            </Link>
+            {/* Neuer Link "Zertifikate" */}
+            <Link
+              to="certificates"
+              smooth={true}
+              duration={500}
+              className="text-white hover:underline cursor-pointer"
+            >
+              Zertifikate
             </Link>
             <Link
               to="skills"
@@ -135,21 +117,24 @@ const App: React.FC = () => {
         </div>
       </header>
 
+      {/* Hero-Section */}
       <main className="relative overflow-hidden h-[50vh] flex items-center justify-center text-center">
         <div className="absolute inset-0 stars-background">
           {[...Array(300)].map((_, i) => {
             const speed = Math.random() * 2 + 2;
-            return <div
-              key={i}
-              className="star"
-              style={{
-                top: `${Math.random() * 120}%`,
-                left: `${Math.random() * 100}%`,
-                animationDuration: `${speed}s`,
-                width: `${4 / speed}px`,
-                height: `${4 / speed}px`,
-              }}
-            ></div>;
+            return (
+              <div
+                key={i}
+                className="star"
+                style={{
+                  top: `${Math.random() * 120}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDuration: `${speed}s`,
+                  width: `${4 / speed}px`,
+                  height: `${4 / speed}px`,
+                }}
+              ></div>
+            );
           })}
         </div>
         <div className="relative z-10 fade-in">
@@ -159,11 +144,13 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <section id="about" className="py-20 bg-gray-900">
+      {/* Abschnitt "Über Mich" (Farbe: bg-gray-800) */}
+      <section id="about" className="py-20 bg-gray-800">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">Über Mich</h2>
           <p className="text-center max-w-2xl mx-auto">
-            Hey, mein Name ist Noel Janzen. Zurzeit mache ich mein Duales Studium im Bereich Informatik.
+            Hey, mein Name ist Noel Janzen. Zurzeit mache ich mein Duales Studium
+            im Bereich Informatik.
           </p>
           <div className="text-center max-w-2xl mx-auto mt-4">
             <p>
@@ -186,6 +173,41 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Neuer Abschnitt "Zertifikate" */}
+      <section id="certificates" className="py-20 bg-gray-900">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-4">Zertifikate</h2>
+          <div className="max-w-2xl mx-auto text-center">
+            <ul className="list-disc list-inside text-left">
+              <li>
+                Grundlagen der Betriebswirtschaftslehre - Institut für
+                berufliche Hochschulbildung
+              </li>
+              <li>Cambridge Assessment</li>
+              <li>
+                Schülerakademie: Klimaschutz schafft Zukunft - gestalte deine
+                und unsere Zukunft jetzt! - Natur- und Umweltschutz-Akademie des
+                Landes NRW
+              </li>
+            </ul>
+            {/* Neuer Hinweis-Text darunter */}
+            <p className="mt-6 text-gray-300 text-center">
+              Falls Sie die Zertifikate als PDF benötigen,{" "}
+              <Link
+                to="contact"
+                smooth={true}
+                duration={500}
+                className="text-blue-400 hover:underline cursor-pointer"
+              >
+                kontaktieren Sie mich
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Abschnitt "Skills" */}
       <section id="skills" className="py-20 bg-gray-800">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">Skills</h2>
@@ -211,10 +233,12 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Abschnitt "Projekte" */}
       <section id="projects" className="py-20 bg-gray-900">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">Projekte</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Projekt 1: Portfolio Website */}
             <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
               <div className="flex-grow">
                 <h3 className="text-xl font-bold mb-2">Portfolio Website</h3>
@@ -243,6 +267,7 @@ const App: React.FC = () => {
               </div>
             </div>
 
+            {/* Projekt 2: Angsthase */}
             <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
               <div className="flex-grow">
                 <h3 className="text-xl font-bold mb-2">Angsthase</h3>
@@ -262,6 +287,7 @@ const App: React.FC = () => {
               </div>
             </div>
 
+            {/* Projekt 3: PokerCats */}
             <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
               <div className="flex-grow">
                 <h3 className="text-xl font-bold mb-2">PokerCats</h3>
@@ -281,9 +307,12 @@ const App: React.FC = () => {
               </div>
             </div>
 
+            {/* Projekt 4: KnowUnity-PDF-Downloader */}
             <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full md:col-span-2 lg:col-span-1">
               <div className="flex-grow">
-                <h3 className="text-xl font-bold mb-2">KnowUnity-PDF-Downloader</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  KnowUnity-PDF-Downloader
+                </h3>
                 <p className="mb-4">
                   Eine Chrome-Erweiterung zum Herunterladen von PDFs von
                   KnowUnity.
@@ -304,6 +333,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Abschnitt "Kontakt" */}
       <section id="contact" className="py-20 bg-gray-800">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-center mb-4">Kontakt</h2>
@@ -344,6 +374,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="bg-blue-600 py-4">
         <div className="container mx-auto text-center">
           <p className="text-white">© 2024 Noel Janzen</p>
