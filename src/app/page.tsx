@@ -191,7 +191,7 @@ const App: React.FC = () => {
               </li>
             </ul>
             {/* Neuer Hinweis-Text darunter */}
-            <p className="mt-6 text-gray-300 text-center">
+            <p className="mt-6 text-center">
               Falls Sie die Zertifikate als PDF sehen wollen,{" "}
               <Link
                 to="contact"
