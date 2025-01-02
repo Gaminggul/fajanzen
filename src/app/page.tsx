@@ -308,7 +308,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Projekt 4: KnowUnity-PDF-Downloader */}
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full md:col-span-2 lg:col-span-1">
+            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
               <div className="flex-grow">
                 <h3 className="text-xl font-bold mb-2">
                   KnowUnity-PDF-Downloader
