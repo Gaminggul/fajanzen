@@ -1,7 +1,6 @@
 import "~/styles/globals.css";
-
+import { Analytics } from "@vercel/analytics/react"
 import { Gabarito } from "next/font/google";
-import { cookies } from "next/headers";
 import type { Metadata } from "next";
 import { NonEmptyArray } from "functional-utilities";
 
@@ -29,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable} overflow-x-hidden`}>
         <main className="w-full">{children}</main>
+        <Analytics />
       </body>
     </html>
   );
