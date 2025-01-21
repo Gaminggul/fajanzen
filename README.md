@@ -1,4 +1,4 @@
-# njwebsite
+# fajanzen.de
 
 ## Overview
 `njwebsite` is a web development project built using the Create React App. This repository is aimed to show my skill in coding a react based web application.
