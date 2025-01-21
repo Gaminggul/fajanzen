@@ -377,7 +377,7 @@ const App: React.FC = () => {
       {/* Footer */}
       <footer className="bg-blue-600 py-4">
         <div className="container mx-auto text-center">
-          <p className="text-white">© 2024 Noel Janzen</p>
+          <p className="text-white">© 2025 Noel Janzen</p>
         </div>
       </footer>
     </div>
