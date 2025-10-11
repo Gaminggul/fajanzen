@@ -12,6 +12,8 @@ const inter = Gabarito({
 export const metadata = {
   title: "Noel Janzen",
   description: "fajanzen - Website / Portfolio von Noel Janzen",
+  metadataBase: new URL('https://fajanzen.de'),
+  alternates: { canonical: 'https://fajanzen.de/' },
 } satisfies Metadata;
 
 export default function RootLayout({
