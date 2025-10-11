@@ -36,7 +36,7 @@ This project represents both my technical expertise as a **Computer Science stud
 |--------|--------------|
 | `app/` | Core source code (layouts, pages, and components) |
 | `public/` | Static assets such as images and icons |
-| `styles/` | Tailwind configuration and global styles |
+| `global.css` | Tailwind configuration and global styles |
 | `middleware.ts` | Edge Middleware for redirects and SEO headers |
 | `vercel.json` | Deployment rules and host headers configuration |
 
@@ -55,7 +55,7 @@ Production URL: [https://fajanzen.de](https://fajanzen.de)
 
 **Author:** [Noel Janzen](https://fajanzen.de)  
 **Role:** Dualer Informatikstudent an der Hochschule Darmstadt  
-**Focus Areas:** Web Development · Software Engineering · UI/UX Design · Automation  
+**Focus Areas:** Web Development · Software Engineering · Automation  
 
 ---
 
