@@ -1,48 +1,100 @@
 # fajanzen.de
 
-## Overview
+## 🌐 Overview
 
-`fajanzen.de` is a web development project built using Next.js. This repository is aimed to show my skill in coding a react based web application.
+[`fajanzen.de`](https://fajanzen.de) is my **personal developer portfolio**, built with **Next.js**, **TypeScript**, and **Tailwind CSS**.  
+It showcases my skills in **modern web development**, **responsive UI design**, and **clean, maintainable code**.
 
-## Features
+This project represents both my technical expertise as a **Computer Science student at Hochschule Darmstadt** and my passion for **building efficient, elegant, and performance-focused applications**.
 
-- **TypeScript**: A robust setup featuring 83% TypeScript for type safety and enhanced editor support.
-- **Tailwind CSS**: Utilizes Tailwind CSS for utility-first CSS styling.
-- **PostCSS**: Configuration for PostCSS to handle CSS transformations.
+---
 
-## Folder Structure
+## ⚙️ Tech Stack
 
-- **public/**: Contains public files such as `index.html`.
-- **app/**: Primary source code directory, including components, and more.
+- **Framework:** [Next.js 15](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Build Tools:** PostCSS · Vercel Edge Middleware
+- **Deployment:** [Vercel](https://vercel.com)
 
-## Deployment
+---
 
-The app is deployed to the modern hosting platform Vercel.
+## 🧩 Features
 
-## Resources
+- ⚡ **Server-Side Rendering (SSR)** and **Static Site Generation (SSG)** for SEO and performance  
+- 🧠 **Type-safe components** using TypeScript  
+- 🎨 **Utility-first design** with Tailwind CSS  
+- 🌍 **Custom Edge Middleware** for domain redirects & SEO control  
+- 📱 **Fully responsive layout** for all screen sizes  
+- 🔒 **CI/CD deployment** via GitHub → Vercel  
 
-- **[Next.js Documentation](https://nextjs.org/docs)**: Learn more about the setup and configurations.
-- **[React Documentation](https://reactjs.org/docs/getting-started.html)**: Dive deep into React.
+---
 
-## About
+## 📂 Folder Structure
 
-The project is hosted [here](https://fajanzen.de).
+| Folder | Description |
+|--------|--------------|
+| `app/` | Core source code (layouts, pages, and components) |
+| `public/` | Static assets such as images and icons |
+| `styles/` | Tailwind configuration and global styles |
+| `middleware.ts` | Edge Middleware for redirects and SEO headers |
+| `vercel.json` | Deployment rules and host headers configuration |
 
-## Contributions
+---
 
-Contributions, issues, and feature requests are welcome!
+## 🚀 Deployment
 
-## License
+The website is automatically deployed via **Vercel CI/CD** from the [`main`](https://github.com/Gaminggul/fajanzen/tree/main) branch.  
+Every commit triggers a build, type check, and production deployment.
+
+Production URL: [https://fajanzen.de](https://fajanzen.de)
+
+---
+
+## 👤 About
+
+**Author:** [Noel Janzen](https://fajanzen.de)  
+**Role:** Dualer Informatikstudent an der Hochschule Darmstadt  
+**Focus Areas:** Web Development · Software Engineering · UI/UX Design · Automation  
+
+---
+
+## 📄 License
 
 This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-## Repository Metrics
+## 📈 Repository Stats
 
-- **Languages**:
-  - TypeScript: 93.7%
-  - JavaScript: 3.3%
-  - CSS: 3.0%
+| Language | Percentage |
+|-----------|-------------|
+| TypeScript | 93.7 % |
+| JavaScript | 3.3 % |
+| CSS | 3.0 % |
+
+---
+
+## 💬 Feedback
+
+Contributions, issues, and feature requests are always welcome.  
+Feel free to open an issue or submit a pull request.
+
+👉 [Create an issue](https://github.com/Gaminggul/fajanzen/issues)
+
+---
+
+## 🔗 Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [React Documentation](https://react.dev/)
+
+---
+
+## 💎 Summary
+
+> This project is more than a demo — it’s my digital calling card.  
+> **fajanzen.de** showcases how I combine clean code, modern design, and technical precision.
 
 ---
