@@ -1,9 +1,17 @@
 {
   "redirects": [
     {
-      "source": "https://www.fajanzen.de/:path*",
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.fajanzen.de" }],
       "destination": "https://fajanzen.de/:path*",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "test.fajanzen.de" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     }
   ]
 }
