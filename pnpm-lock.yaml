@@ -54,9 +54,6 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.1.14)
-      typescript:
-        specifier: ^5.3.3
-        version: 5.9.3
       web-vitals:
         specifier: ^2.1.4
         version: 2.1.4
@@ -109,6 +106,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.14
         version: 4.1.14
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
 
 packages:
 
