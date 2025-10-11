@@ -1,4 +1,3 @@
-// @ts-ignore: CSS side-effect import lacks type declarations
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
 import { Gabarito } from "next/font/google";

@@ -15,6 +15,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-scroll";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Starfield from "./components/Starfield";
+import Links from "next/link";
 
 const skills = [
   { icon: FaReact, name: "React" },
@@ -46,9 +47,9 @@ const App: React.FC = () => {
       <header className="bg-blue-600 py-4 shadow-md">
         <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
           <SpeedInsights />
-          <a href="/" className="text-2xl font-bold text-white hidden md:flex">
+          <Links href="/" className="text-2xl font-bold text-white hidden md:flex">
             fajanzen.de
-          </a>
+          </Links>
           <nav className="flex justify-evenly gap-0 md:gap-6">
             <Link
               to="about"
@@ -233,7 +234,7 @@ const App: React.FC = () => {
               <div className="flex-grow">
                 <h3 className="text-xl font-bold mb-2">Angsthase</h3>
                 <p className="mb-4">
-                  Eine Partyapp mit den Fragen vom Kartenspiel "Angsthase".
+                  Eine Partyapp mit den Fragen vom Kartenspiel &quot;Angsthase&quot;.
                 </p>
               </div>
               <div className="mt-auto flex justify-between items-center">
