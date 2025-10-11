@@ -4,22 +4,18 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.97",
-    "@types/react": "^18.3.2",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.0.12",
     "functional-utilities": "^3.8.0",
-    "next": "^14.2.12",
-    "react": "^18.3.1",
-    "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "^18.3.1",
-    "react-helmet": "^6.1.0",
+    "next": "15.5.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "react-icons": "^5.2.1",
+    "react-router-dom": "^7.9.4",
     "react-scroll": "^1.9.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.3.3",
@@ -28,7 +24,7 @@
   "scripts": {
     "start": "next start",
     "build": "next build",
-    "dev": "next dev --turbo"
+    "dev": "next dev --turbopack"
   },
   "eslintConfig": {
     "extends": [
@@ -49,12 +45,28 @@
     ]
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-helmet": "^6.1.11",
     "@types/react-icons": "^2.2.7",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3"
+    "@types/react-scroll": "^1.8.10",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.37.0",
+    "eslint-config-next": "15.5.4",
+    "postcss": "^8.5.6",
+    "react-copy-to-clipboard": "^5.1.0",
+    "tailwindcss": "^4.1.14"
   },
-  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.2",
+      "@types/react-dom": "19.2.1"
+    }
+  }
 }

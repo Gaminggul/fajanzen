@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @keyframes fadeIn {
   from {
@@ -22,6 +20,7 @@
   overflow: hidden;
   top: 0;
   left: 0;
+  z-index: 0;
 }
 
 .star {
@@ -47,6 +46,7 @@
   }
 }
 
-.group:hover .group-hover\\:opacity-100 {
+/* Workaround für Hover-Gruppen mit explizitem Selector */
+.group:hover .group-hover\:opacity-100 {
   opacity: 1 !important;
 }

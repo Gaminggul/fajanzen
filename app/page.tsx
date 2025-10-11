@@ -10,11 +10,11 @@ import {
   FaGithub,
 } from "react-icons/fa";
 import { SiCplusplus } from "react-icons/si";
-import { SiDart, SiTypescript, SiJavascript, SiCsharp } from "react-icons/si";
+import { SiDart, SiTypescript, SiJavascript } from "react-icons/si";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-scroll";
-import { Helmet } from "react-helmet";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Starfield from "./components/Starfield";
 
 const skills = [
   { icon: FaReact, name: "React" },
@@ -24,7 +24,6 @@ const skills = [
   { icon: FaPython, name: "Python" },
   { icon: FaHtml5, name: "HTML/CSS" },
   { icon: FaJava, name: "Java" },
-  { icon: SiCsharp, name: "C#" },
   { icon: FaRust, name: "Rust" },
   { icon: SiCplusplus, name: "C++" },
 ];
@@ -98,24 +97,7 @@ const App: React.FC = () => {
 
       {/* Hero-Section */}
       <main className="relative overflow-hidden h-[50vh] flex items-center justify-center text-center">
-        <div className="absolute inset-0 stars-background">
-          {[...Array(300)].map((_, i) => {
-            const speed = Math.random() * 2 + 2;
-            return (
-              <div
-                key={i}
-                className="star"
-                style={{
-                  top: `${Math.random() * 120}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDuration: `${speed}s`,
-                  width: `${4 / speed}px`,
-                  height: `${4 / speed}px`,
-                }}
-              ></div>
-            );
-          })}
-        </div>
+        <Starfield count={300} seed={123} />
         <div className="relative z-10 fade-in">
           <h1 className="text-green-500 text-7xl mb-4 animate-pulse">Hi!</h1>
           <p className="text-5xl">Mein Name ist</p>
