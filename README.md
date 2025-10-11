@@ -42,9 +42,8 @@ This project is open-source and available under the [MIT License](LICENSE).
 ## Repository Metrics
 
 - **Languages**:
-  - TypeScript: 83.0%
-  - HTML: 11.3%
-  - CSS: 4.0%
-  - JavaScript: 1.7%
+  - TypeScript: 93.7%
+  - JavaScript: 3.3%
+  - CSS: 3.0%
 
 ---
