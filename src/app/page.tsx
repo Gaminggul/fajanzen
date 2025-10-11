@@ -7,7 +7,6 @@ import {
   FaJava,
   FaRust,
   FaEnvelope,
-  FaTwitter,
   FaGithub,
 } from "react-icons/fa";
 import { SiCplusplus } from "react-icons/si";
@@ -33,12 +32,6 @@ const skills = [
 const contacts = [
   { icon: FaEnvelope, name: "Email", value: "noel@fajanzen.de", type: "copy" },
   {
-    icon: FaTwitter,
-    name: "Twitter",
-    value: "https://twitter.com/gaminggul1",
-    type: "link",
-  },
-  {
     icon: FaGithub,
     name: "GitHub",
     value: "https://github.com/Gaminggul",
@@ -49,20 +42,6 @@ const contacts = [
 const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
-      <Helmet>
-        <title>Noel Janzen Portfolio</title>
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@gaminggul1" />
-        <meta name="twitter:title" content="Noel Janzen Portfolio" />
-        <meta
-          name="twitter:description"
-          content="Willkommen auf der Portfolio-Seite von Noel Janzen."
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.fajanzen.de/favicon.png"
-        />
-      </Helmet>
 
       {/* Header */}
       <header className="bg-blue-600 py-4 shadow-md">
@@ -378,6 +357,18 @@ const App: React.FC = () => {
       <footer className="bg-blue-600 py-4">
         <div className="container mx-auto text-center">
           <p className="text-white">© 2025 Noel Janzen</p>
+          <a
+            href="/impressum"
+            className="text-white hover:underline mx-2"
+          >
+            Impressum
+          </a>
+          <a
+            href="/datenschutz"
+            className="text-white hover:underline mx-2"
+          >
+            Datenschutz
+          </a>
         </div>
       </footer>
     </div>
