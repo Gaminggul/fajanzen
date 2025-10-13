@@ -59,12 +59,6 @@ Production URL: [https://fajanzen.de](https://fajanzen.de)
 
 ---
 
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
 ## 📈 Repository Stats
 
 | Language | Percentage |
