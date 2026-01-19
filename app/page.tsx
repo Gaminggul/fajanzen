@@ -1,361 +1,340 @@
-"use client";
-import React from "react";
+import { cookies, headers } from "next/headers";
+import HomePage from "./components/HomePage";
 import {
-  FaReact,
-  FaHtml5,
-  FaPython,
-  FaJava,
-  FaRust,
-  FaEnvelope,
-  FaGithub,
-} from "react-icons/fa";
-import { SiCplusplus } from "react-icons/si";
-import { SiDart, SiTypescript, SiJavascript } from "react-icons/si";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Link } from "react-scroll";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Starfield from "./components/Starfield";
-import Links from "next/link";
+  DEFAULT_LOCALE,
+  LOCALE_COOKIE,
+  LOCALE_HEADER,
+  isLocale,
+  type Locale,
+} from "../lib/locale";
 
-const skills = [
-  { icon: FaReact, name: "React" },
-  { icon: SiDart, name: "Dart" },
-  { icon: SiTypescript, name: "TypeScript" },
-  { icon: SiJavascript, name: "JavaScript" },
-  { icon: FaPython, name: "Python" },
-  { icon: FaHtml5, name: "HTML/CSS" },
-  { icon: FaJava, name: "Java" },
-  { icon: FaRust, name: "Rust" },
-  { icon: SiCplusplus, name: "C++" },
-];
-
-const contacts = [
-  { icon: FaEnvelope, name: "Email", value: "noel@fajanzen.de", type: "copy" },
-  {
-    icon: FaGithub,
-    name: "GitHub",
-    value: "https://github.com/Gaminggul",
-    type: "link",
+const translations = {
+  de: {
+    nav: {
+      about: "Über mich",
+      certificates: "Zertifikate",
+      skills: "Skills",
+      projects: "Projekte",
+      contact: "Kontakt",
+    },
+    hero: {
+      greeting: "Hi!",
+      intro: "Mein Name ist",
+      name: "Noel Janzen",
+    },
+    about: {
+      title: "Über mich",
+      intro:
+        "Hey, mein Name ist Noel Janzen. Zurzeit mache ich mein Duales Studium im Bereich Informatik.",
+      birthdayLabel: "Geburtstag:",
+      birthdayValue: "19.04.2006",
+      locationLabel: "Standort:",
+      locationValue: "Hamm, Nordrhein-Westfalen, Deutschland",
+      hobbiesLabel: "Hobbys:",
+      hobbies: [
+        "Gaming",
+        "Tauchen",
+        "Bouldern",
+        "Angeln",
+        "Programmieren",
+      ],
+    },
+    certificates: {
+      title: "Zertifikate",
+      items: [
+        "Grundlagen der Betriebswirtschaftslehre - Institut für berufliche Hochschulbildung",
+        "Cambridge Assessment",
+        "Schülerakademie: Klimaschutz schafft Zukunft - gestalte deine und unsere Zukunft jetzt! - Natur- und Umweltschutz-Akademie des Landes NRW",
+      ],
+      notePrefix: "Falls Sie die Zertifikate als PDF sehen möchten,",
+      noteLink: "kontaktieren Sie mich",
+      noteSuffix: ".",
+    },
+    skills: {
+      title: "Skills",
+    },
+    projects: {
+      title: "Projekte",
+      items: [
+        {
+          title: "Portfolio Website",
+          description:
+            "Meine persönliche Portfolio-Website, die meine Fähigkeiten und Projekte zeigt.",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/njwebsite" },
+            { label: "Website öffnen", url: "https://fajanzen.de" },
+          ],
+        },
+        {
+          title: "Angsthase",
+          description:
+            "Eine Party-App mit den Fragen aus dem Kartenspiel \"Angsthase\".",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/angsthase" },
+          ],
+        },
+        {
+          title: "PokerCats",
+          description: "Ein webbasiertes Pokerspiel namens PokerCats.",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/PokerOnline" },
+          ],
+        },
+        {
+          title: "KnowUnity-PDF-Downloader",
+          description:
+            "Eine Chrome-Erweiterung zum Herunterladen von PDFs von KnowUnity.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/KnowUnity-PDF-Downloader",
+            },
+          ],
+        },
+        {
+          title: "Minecraft Server Management Scripts",
+          description:
+            "Skripte zur Verwaltung und Automatisierung von Minecraft-Servern.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/minecraft-server-management-scripts",
+            },
+          ],
+        },
+      ],
+    },
+    contact: {
+      title: "Kontakt",
+    },
+    footer: {
+      copyright: "© 2025 Noel Janzen",
+      imprint: "Impressum",
+      privacy: "Datenschutz",
+    },
   },
-];
+  en: {
+    nav: {
+      about: "About",
+      certificates: "Certificates",
+      skills: "Skills",
+      projects: "Projects",
+      contact: "Contact",
+    },
+    hero: {
+      greeting: "Hi!",
+      intro: "My name is",
+      name: "Noel Janzen",
+    },
+    about: {
+      title: "About",
+      intro:
+        "Hi, my name is Noel Janzen. I'm currently doing a dual study program in computer science.",
+      birthdayLabel: "Birthday:",
+      birthdayValue: "19.04.2006",
+      locationLabel: "Location:",
+      locationValue: "Hamm, North Rhine-Westphalia, Germany",
+      hobbiesLabel: "Hobbies:",
+      hobbies: [
+        "Gaming",
+        "Diving",
+        "Bouldering",
+        "Fishing",
+        "Programming",
+      ],
+    },
+    certificates: {
+      title: "Certificates",
+      items: [
+        "Fundamentals of Business Administration - Institute for Vocational Higher Education",
+        "Cambridge Assessment",
+        "Student Academy: Climate protection creates a future - shape your future and ours now! - Nature and Environmental Protection Academy of the State of NRW",
+      ],
+      notePrefix: "If you'd like to see the certificates as PDFs,",
+      noteLink: "contact me",
+      noteSuffix: ".",
+    },
+    skills: {
+      title: "Skills",
+    },
+    projects: {
+      title: "Projects",
+      items: [
+        {
+          title: "Portfolio Website",
+          description:
+            "My personal portfolio website showcasing my skills and projects.",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/njwebsite" },
+            { label: "Open website", url: "https://fajanzen.de" },
+          ],
+        },
+        {
+          title: "Angsthase",
+          description:
+            "A party app with questions from the card game \"Angsthase\".",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/angsthase" },
+          ],
+        },
+        {
+          title: "PokerCats",
+          description: "A web-based poker game called PokerCats.",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/PokerOnline" },
+          ],
+        },
+        {
+          title: "KnowUnity-PDF-Downloader",
+          description:
+            "A Chrome extension for downloading PDFs from KnowUnity.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/KnowUnity-PDF-Downloader",
+            },
+          ],
+        },
+        {
+          title: "Minecraft Server Management Scripts",
+          description: "Scripts to manage and automate Minecraft servers.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/minecraft-server-management-scripts",
+            },
+          ],
+        },
+      ],
+    },
+    contact: {
+      title: "Contact",
+    },
+    footer: {
+      copyright: "© 2025 Noel Janzen",
+      imprint: "Imprint",
+      privacy: "Privacy",
+    },
+  },
+  ru: {
+    nav: {
+      about: "Обо мне",
+      certificates: "Сертификаты",
+      skills: "Навыки",
+      projects: "Проекты",
+      contact: "Контакты",
+    },
+    hero: {
+      greeting: "Привет!",
+      intro: "Меня зовут",
+      name: "Noel Janzen",
+    },
+    about: {
+      title: "Обо мне",
+      intro:
+        "Привет, меня зовут Noel Janzen. Сейчас я учусь по дуальной программе в области информатики.",
+      birthdayLabel: "Дата рождения:",
+      birthdayValue: "19.04.2006",
+      locationLabel: "Местоположение:",
+      locationValue: "Хамм, Северный Рейн-Вестфалия, Германия",
+      hobbiesLabel: "Хобби:",
+      hobbies: [
+        "Игры",
+        "Дайвинг",
+        "Боулдеринг",
+        "Рыбалка",
+        "Программирование",
+      ],
+    },
+    certificates: {
+      title: "Сертификаты",
+      items: [
+        "Основы управления бизнесом - Институт профессионального высшего образования",
+        "Cambridge Assessment",
+        "Студенческая академия: защита климата создает будущее - создавай свое и наше будущее сейчас! - Академия охраны природы и окружающей среды земли Северный Рейн-Вестфалия",
+      ],
+      notePrefix: "Если хотите увидеть сертификаты в формате PDF,",
+      noteLink: "свяжитесь со мной",
+      noteSuffix: ".",
+    },
+    skills: {
+      title: "Навыки",
+    },
+    projects: {
+      title: "Проекты",
+      items: [
+        {
+          title: "Портфолио",
+          description:
+            "Мой личный сайт-портфолио, где я показываю свои навыки и проекты.",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/njwebsite" },
+            { label: "Открыть сайт", url: "https://fajanzen.de" },
+          ],
+        },
+        {
+          title: "Angsthase",
+          description:
+            "Приложение для вечеринок с вопросами из карточной игры \"Angsthase\".",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/angsthase" },
+          ],
+        },
+        {
+          title: "PokerCats",
+          description: "Веб-игра в покер под названием PokerCats.",
+          links: [
+            { label: "GitHub", url: "https://github.com/Gaminggul/PokerOnline" },
+          ],
+        },
+        {
+          title: "KnowUnity-PDF-Downloader",
+          description: "Расширение Chrome для скачивания PDF с KnowUnity.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/KnowUnity-PDF-Downloader",
+            },
+          ],
+        },
+        {
+          title: "Minecraft Server Management Scripts",
+          description:
+            "Скрипты для управления и автоматизации Minecraft-серверов.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/minecraft-server-management-scripts",
+            },
+          ],
+        },
+      ],
+    },
+    contact: {
+      title: "Контакты",
+    },
+    footer: {
+      copyright: "© 2025 Noel Janzen",
+      imprint: "Импрессум",
+      privacy: "Политика конфиденциальности",
+    },
+  },
+} as const;
 
-const App: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-black text-white">
+async function resolveLocale(): Promise<Locale> {
+  const cookieStore = await cookies();
+  const headerStore = await headers();
+  const cookieLocale = cookieStore.get(LOCALE_COOKIE)?.value;
+  if (isLocale(cookieLocale)) {
+    return cookieLocale;
+  }
 
-      {/* Header */}
-      <header className="bg-blue-600 py-4 shadow-md">
-        <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
-          <SpeedInsights />
-          <Links href="/" className="text-2xl font-bold text-white hidden md:flex">
-            fajanzen.de
-          </Links>
-          <nav className="flex justify-evenly gap-0 md:gap-6">
-            <Link
-              to="about"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              Über Mich
-            </Link>
-            {/* Neuer Link "Zertifikate" */}
-            <Link
-              to="certificates"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              Zertifikate
-            </Link>
-            <Link
-              to="skills"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              Skills
-            </Link>
-            <Link
-              to="projects"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              Projekte
-            </Link>
-            <Link
-              to="contact"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              Kontakt
-            </Link>
-          </nav>
-        </div>
-      </header>
+  const headerLocale = headerStore.get(LOCALE_HEADER);
+  return isLocale(headerLocale) ? headerLocale : DEFAULT_LOCALE;
+}
 
-      {/* Hero-Section */}
-      <main className="relative overflow-hidden h-[50vh] flex items-center justify-center text-center">
-        <Starfield count={300} seed={123} />
-        <div className="relative z-10 fade-in">
-          <h1 className="text-green-500 text-7xl mb-4 animate-pulse">Hi!</h1>
-          <p className="text-5xl">Mein Name ist</p>
-          <h2 className="text-6xl font-bold">Noel Janzen</h2>
-        </div>
-      </main>
-
-      {/* Abschnitt "Über Mich" (Farbe: bg-gray-800) */}
-      <section id="about" className="py-20 bg-gray-800">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Über Mich</h2>
-          <p className="text-center max-w-2xl mx-auto">
-            Hey, mein Name ist Noel Janzen. Zurzeit mache ich mein Duales Studium
-            im Bereich Informatik.
-          </p>
-          <div className="text-center max-w-2xl mx-auto mt-4">
-            <p>
-              <strong>Geburtstag:</strong> 19.04.2006
-            </p>
-            <p>
-              <strong>Standort:</strong> Hamm, Nordrhein-Westfalen, Deutschland
-            </p>
-            <div className="flex justify-center mt-4">
-              <strong className="mr-4">Hobbys:</strong>
-              <ul className="list-none text-left">
-                <li>🎮 Gaming</li>
-                <li>🤿 Tauchen</li>
-                <li>🧗‍♂️ Bouldern</li>
-                <li>🎣 Angeln</li>
-                <li>💻 Programmieren</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Neuer Abschnitt "Zertifikate" */}
-      <section id="certificates" className="py-20 bg-gray-900">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Zertifikate</h2>
-          <div className="max-w-2xl mx-auto text-center">
-            <ul className="list-disc list-inside text-left">
-              <li>
-                Grundlagen der Betriebswirtschaftslehre - Institut für
-                berufliche Hochschulbildung
-              </li>
-              <li>Cambridge Assessment</li>
-              <li>
-                Schülerakademie: Klimaschutz schafft Zukunft - gestalte deine
-                und unsere Zukunft jetzt! - Natur- und Umweltschutz-Akademie des
-                Landes NRW
-              </li>
-            </ul>
-            {/* Neuer Hinweis-Text darunter */}
-            <p className="mt-6 text-center">
-              Falls Sie die Zertifikate als PDF sehen wollen,{" "}
-              <Link
-                to="contact"
-                smooth={true}
-                duration={500}
-                className="text-blue-400 hover:underline cursor-pointer"
-              >
-                kontaktieren Sie mich
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Abschnitt "Skills" */}
-      <section id="skills" className="py-20 bg-gray-800">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Skills</h2>
-          <div className="flex flex-wrap justify-center">
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <div
-                  key={index}
-                  className="group relative flex flex-col items-center m-4"
-                >
-                  <Icon className="text-6xl text-white" />
-                  <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 flex flex-col items-center mb-6">
-                    <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                      {skill.name}
-                    </span>
-                    <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Abschnitt "Projekte" */}
-      <section id="projects" className="py-20 bg-gray-900">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Projekte</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Projekt 1: Portfolio Website */}
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
-              <div className="flex-grow">
-                <h3 className="text-xl font-bold mb-2">Portfolio Website</h3>
-                <p className="mb-4">
-                  Meine persönliche Portfolio-Website, die meine Fähigkeiten und
-                  Projekte zeigt.
-                </p>
-              </div>
-              <div className="mt-auto flex justify-between items-center">
-                <a
-                  href="https://github.com/Gaminggul/njwebsite"
-                  className="text-blue-400 hover:text-red-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://fajanzen.de"
-                  className="text-blue-400 hover:text-red-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Öffnet die Website
-                </a>
-              </div>
-            </div>
-
-            {/* Projekt 2: Angsthase */}
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
-              <div className="flex-grow">
-                <h3 className="text-xl font-bold mb-2">Angsthase</h3>
-                <p className="mb-4">
-                  Eine Partyapp mit den Fragen vom Kartenspiel &quot;Angsthase&quot;.
-                </p>
-              </div>
-              <div className="mt-auto flex justify-between items-center">
-                <a
-                  href="https://github.com/Gaminggul/angsthase"
-                  className="text-blue-400 hover:text-red-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-
-            {/* Projekt 3: PokerCats */}
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
-              <div className="flex-grow">
-                <h3 className="text-xl font-bold mb-2">PokerCats</h3>
-                <p className="mb-4">
-                  Ein webbasiertes Pokerspiel namens PokerCats.
-                </p>
-              </div>
-              <div className="mt-auto flex justify-between items-center">
-                <a
-                  href="https://github.com/Gaminggul/PokerOnline"
-                  className="text-blue-400 hover:text-red-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-
-            {/* Projekt 4: KnowUnity-PDF-Downloader */}
-            <div className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full">
-              <div className="flex-grow">
-                <h3 className="text-xl font-bold mb-2">
-                  KnowUnity-PDF-Downloader
-                </h3>
-                <p className="mb-4">
-                  Eine Chrome-Erweiterung zum Herunterladen von PDFs von
-                  KnowUnity.
-                </p>
-              </div>
-              <div className="mt-auto flex justify-between items-center">
-                <a
-                  href="https://github.com/Gaminggul/KnowUnity-PDF-Downloader"
-                  className="text-blue-400 hover:text-red-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Abschnitt "Kontakt" */}
-      <section id="contact" className="py-20 bg-gray-800">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-center mb-4">Kontakt</h2>
-          <div className="flex flex-wrap justify-center">
-            {contacts.map((contact, index) => {
-              const Icon = contact.icon;
-              return contact.type === "copy" ? (
-                <CopyToClipboard text={contact.value} key={index}>
-                  <div className="group relative flex flex-col items-center m-4 cursor-pointer bg-gray-700 p-4 rounded">
-                    <Icon className="text-6xl text-white" />
-                    <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 flex flex-col items-center mb-6">
-                      <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                        {contact.value}
-                      </span>
-                      <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                    </div>
-                  </div>
-                </CopyToClipboard>
-              ) : (
-                <a
-                  href={contact.value}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={index}
-                  className="group relative flex flex-col items-center m-4 cursor-pointer bg-gray-700 p-4 rounded"
-                >
-                  <Icon className="text-6xl text-white" />
-                  <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 flex flex-col items-center mb-6">
-                    <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                      {contact.value}
-                    </span>
-                    <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-blue-600 py-4">
-        <div className="container mx-auto text-center">
-          <p className="text-white">© 2025 Noel Janzen</p>
-          <a
-            href="/impressum"
-            className="text-white hover:underline mx-2"
-          >
-            Impressum
-          </a>
-          <a
-            href="/datenschutz"
-            className="text-white hover:underline mx-2"
-          >
-            Datenschutz
-          </a>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
+export default async function Page() {
+  const locale = await resolveLocale();
+  const copy = translations[locale];
+  return <HomePage copy={copy} locale={locale} />;
+}
