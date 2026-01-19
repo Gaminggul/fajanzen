@@ -48,11 +48,11 @@ type HomeCopy = {
     locationLabel: string;
     locationValue: string;
     hobbiesLabel: string;
-    hobbies: string[];
+    hobbies: ReadonlyArray<string>;
   };
   certificates: {
     title: string;
-    items: string[];
+    items: ReadonlyArray<string>;
     notePrefix: string;
     noteLink: string;
     noteSuffix: string;
@@ -62,10 +62,10 @@ type HomeCopy = {
   };
   projects: {
     title: string;
-    items: Array<{
+    items: ReadonlyArray<{
       title: string;
       description: string;
-      links: Array<{
+      links: ReadonlyArray<{
         label: string;
         url: string;
       }>;
