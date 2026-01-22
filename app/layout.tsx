@@ -1,8 +1,9 @@
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
-import { Gabarito } from "next/font/google";
-import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
+import { SEO } from "@/lib/site";
 import {
   DEFAULT_LOCALE,
   LOCALE_COOKIE,
@@ -10,18 +11,49 @@ import {
   isLocale,
 } from "../lib/locale";
 
-const inter = Gabarito({
+const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
   display: "swap",
 });
 
-export const metadata = {
-  title: "Noel Janzen",
-  description: "fajanzen - Website / Portfolio von Noel Janzen",
-  metadataBase: new URL('https://fajanzen.de'),
-  alternates: { canonical: 'https://fajanzen.de/' },
-} satisfies Metadata;
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const DEFAULT_SEO = SEO.en;
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://fajanzen.de"),
+  title: {
+    default: DEFAULT_SEO.title,
+    template: "%s - Noel Janzen",
+  },
+  description: DEFAULT_SEO.description,
+  applicationName: "fajanzen",
+  creator: "Noel Janzen",
+  publisher: "Noel Janzen",
+  category: "Technology",
+  manifest: "/manifest.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    siteName: "fajanzen",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050806",
+};
 
 export default async function RootLayout({
   children,
@@ -40,8 +72,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`font-sans ${inter.variable} overflow-x-hidden`}>
-        <main className="w-full">{children}</main>
+      <body
+        className={`${bodyFont.variable} ${displayFont.variable} overflow-x-hidden bg-[#050806] text-slate-100`}
+      >
+        <a href="#content" className="skip-link">
+          Skip to content
+        </a>
+        <div className="w-full">{children}</div>
         <Analytics />
       </body>
     </html>

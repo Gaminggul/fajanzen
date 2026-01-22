@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #050806;
+  color: #e6f3ee;
+  font-family: var(--font-body);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(94, 242, 214, 0.6);
+  background: rgba(5, 8, 6, 0.95);
+  color: #e6f3ee;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -13,6 +49,55 @@
   animation: fadeIn 2s ease-in-out;
 }
 
+.reveal-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-lift {
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px -40px rgba(94, 242, 214, 0.6);
+  border-color: rgba(94, 242, 214, 0.5);
+}
+
+.rise-in {
+  animation: riseIn 0.9s ease-out both;
+}
+
+.rise-in-delay {
+  animation: riseIn 0.9s ease-out 0.2s both;
+}
+
+.rise-in-delay-2 {
+  animation: riseIn 0.9s ease-out 0.4s both;
+}
+
+.rise-in-delay-3 {
+  animation: riseIn 0.9s ease-out 0.6s both;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .stars-background {
   position: absolute;
   width: 100%;
@@ -21,13 +106,21 @@
   top: 0;
   left: 0;
   z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .star {
   position: absolute;
-  background: white;
+  background: radial-gradient(
+    circle,
+    rgba(232, 255, 247, 0.9) 0%,
+    rgba(94, 242, 214, 0.45) 60%,
+    rgba(94, 242, 214, 0) 100%
+  );
   border-radius: 50%;
   opacity: 0.8;
+  box-shadow: 0 0 12px rgba(94, 242, 214, 0.35);
   animation: starAnimation linear infinite;
 }
 
@@ -49,4 +142,19 @@
 /* Workaround für Hover-Gruppen mit explizitem Selector */
 .group:hover .group-hover\:opacity-100 {
   opacity: 1 !important;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(143, 240, 216, 0.9);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .rise-in,
+  .reveal-up,
+  .star {
+    animation: none !important;
+    transition: none !important;
+  }
 }

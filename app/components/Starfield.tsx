@@ -6,7 +6,11 @@ import { makeStars } from "@/lib/random";
 export default function Starfield({ count = 120, seed = 123 }) {
     const stars = useMemo(() => makeStars(count, seed), [count, seed]);
     return (
-        <div className="stars-background" suppressHydrationWarning>
+        <div
+            className="stars-background"
+            suppressHydrationWarning
+            aria-hidden="true"
+        >
             {stars.map((s, i) => (
                 <div
                     key={i}

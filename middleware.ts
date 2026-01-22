@@ -42,10 +42,15 @@ function withLocaleHeader(
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") || "";
+  const pathname = request.nextUrl.pathname;
+  const pathLocale = pathname.split("/")[1];
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
   let locale: Locale;
   let shouldSetCookie = false;
-  if (isLocale(cookieLocale)) {
+  if (isLocale(pathLocale)) {
+    locale = pathLocale;
+    shouldSetCookie = cookieLocale !== locale;
+  } else if (isLocale(cookieLocale)) {
     locale = cookieLocale;
   } else {
     locale = detectLocale(request);

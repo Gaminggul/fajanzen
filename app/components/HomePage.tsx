@@ -5,6 +5,8 @@ import { Link } from "react-scroll";
 import Links from "next/link";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import type { IconType } from "react-icons";
 import {
   FaReact,
   FaHtml5,
@@ -14,6 +16,9 @@ import {
   FaEnvelope,
   FaGithub,
   FaInstagram,
+  FaServer,
+  FaGamepad,
+  FaCode,
 } from "react-icons/fa";
 import {
   SiCplusplus,
@@ -39,8 +44,16 @@ type HomeCopy = {
     greeting: string;
     intro: string;
     name: string;
+    role: string;
+    summary: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    highlights: ReadonlyArray<string>;
+    panelTitle: string;
+    meta: ReadonlyArray<{ label: string; value: string }>;
   };
   about: {
+    kicker: string;
     title: string;
     intro: string;
     birthdayLabel: string;
@@ -52,27 +65,41 @@ type HomeCopy = {
   };
   certificates: {
     title: string;
-    items: ReadonlyArray<string>;
+    items: ReadonlyArray<{ title: string; detail: string }>;
     notePrefix: string;
     noteLink: string;
     noteSuffix: string;
   };
   skills: {
     title: string;
+    subtitle: string;
+    groups: ReadonlyArray<{
+      title: string;
+      items: ReadonlyArray<string>;
+    }>;
   };
   projects: {
     title: string;
-    items: ReadonlyArray<{
+    featuredTitle: string;
+    featured: ReadonlyArray<{
+      title: string;
+      summary: string;
+      focus: string;
+      tags: ReadonlyArray<string>;
+      links: ReadonlyArray<{ label: string; url: string }>;
+    }>;
+    moreTitle: string;
+    more: ReadonlyArray<{
       title: string;
       description: string;
-      links: ReadonlyArray<{
-        label: string;
-        url: string;
-      }>;
+      links: ReadonlyArray<{ label: string; url: string }>;
     }>;
   };
   contact: {
     title: string;
+    subtitle: string;
+    ctaCopy: string;
+    ctaOpen: string;
   };
   footer: {
     copyright: string;
@@ -81,28 +108,29 @@ type HomeCopy = {
   };
 };
 
-const skills = [
-  { icon: FaReact, name: "React" },
-  { icon: SiDart, name: "Dart" },
-  { icon: SiTypescript, name: "TypeScript" },
-  { icon: SiJavascript, name: "JavaScript" },
-  { icon: FaPython, name: "Python" },
-  { icon: FaHtml5, name: "HTML/CSS" },
-  { icon: FaJava, name: "Java" },
-  { icon: FaRust, name: "Rust" },
-  { icon: SiCplusplus, name: "C++" },
-  { icon: SiGnubash, name: "Bash" },
-  { icon: SiDocker, name: "Docker" },
-  { icon: SiGitlab, name: "GitLab CI/CD" },
-];
-
 const LOCALE_OPTIONS: Array<{ value: Locale; label: string }> = [
   { value: "de", label: "DE" },
   { value: "en", label: "EN" },
   { value: "ru", label: "RU" },
 ];
 
-const hobbyIcons = ["🎮", "🤿", "🧗‍♂️", "🎣", "💻"];
+const SKILL_ICON_MAP: Record<string, IconType> = {
+  React: FaReact,
+  Dart: SiDart,
+  TypeScript: SiTypescript,
+  JavaScript: SiJavascript,
+  Python: FaPython,
+  "HTML/CSS": FaHtml5,
+  Java: FaJava,
+  Rust: FaRust,
+  "C++": SiCplusplus,
+  Bash: SiGnubash,
+  Docker: SiDocker,
+  "GitLab CI/CD": SiGitlab,
+};
+
+const PROJECT_ICONS: IconType[] = [FaServer, FaGamepad, FaCode];
+const hobbyIcons = ["🎮", "🤿", "🧗‍♂️", "🎣", "💻", "⛳"];
 
 export default function HomePage({
   copy,
@@ -114,14 +142,16 @@ export default function HomePage({
   const router = useRouter();
 
   const contacts = [
-    { icon: FaEnvelope, value: "noel@fajanzen.de", type: "copy" as const },
+    { icon: FaEnvelope, label: "Email", value: "noel@fajanzen.de", type: "copy" as const },
     {
       icon: FaGithub,
+      label: "GitHub",
       value: "https://github.com/Gaminggul",
       type: "link" as const,
     },
     {
       icon: FaInstagram,
+      label: "Instagram",
       value: "https://www.instagram.com/drivenby.noel/",
       type: "link" as const,
     },
@@ -132,279 +162,599 @@ export default function HomePage({
       return;
     }
     document.cookie = `${LOCALE_COOKIE}=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
-    router.refresh();
+    router.push(`/${nextLocale}`);
   };
 
+  useEffect(() => {
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-animate]"),
+    );
+    if (elements.length === 0) {
+      return;
+    }
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    if (prefersReduced.matches) {
+      elements.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
+    );
+
+    elements.forEach((el) => {
+      const delay = el.dataset.delay;
+      if (delay) {
+        el.style.transitionDelay = `${delay}ms`;
+      }
+      observer.observe(el);
+    });
+
+    const fallbackTimer = window.setTimeout(() => {
+      elements.forEach((el) => el.classList.add("is-visible"));
+    }, 2000);
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
+  }, [locale]);
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="bg-blue-600 py-4 shadow-md">
-        <div className="md:px-8 md:flex md:justify-between items-center mx-0 w-full">
-          <SpeedInsights />
-          <Links href="/" className="text-2xl font-bold text-white hidden md:flex">
-            fajanzen.de
-          </Links>
-          <nav className="flex justify-evenly gap-0 md:gap-6">
-            <Link
-              to="about"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
+    <div className="relative min-h-screen overflow-hidden bg-[#050806] text-slate-100">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(94,242,214,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(94,242,214,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
+        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(94,242,214,0.35),rgba(94,242,214,0))] blur-3xl" />
+        <div className="absolute bottom-[-240px] right-[-120px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(243,181,98,0.26),rgba(243,181,98,0))] blur-3xl" />
+      </div>
+
+      <div className="relative z-10">
+        <header className="sticky top-0 z-20 border-b border-white/10 bg-[#050806]/80 backdrop-blur">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+            <SpeedInsights />
+            <Links
+              href={`/${locale}`}
+              className="font-display hidden text-sm uppercase tracking-[0.35em] text-emerald-200/90 md:flex"
             >
-              {copy.nav.about}
-            </Link>
-            <Link
-              to="certificates"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              {copy.nav.certificates}
-            </Link>
-            <Link
-              to="skills"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              {copy.nav.skills}
-            </Link>
-            <Link
-              to="projects"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              {copy.nav.projects}
-            </Link>
-            <Link
-              to="contact"
-              smooth={true}
-              duration={500}
-              className="text-white hover:underline cursor-pointer"
-            >
-              {copy.nav.contact}
-            </Link>
-          </nav>
-          <div
-            className="flex justify-center md:justify-end mt-3 md:mt-0 gap-2"
-            role="group"
-            aria-label="Language"
+              fajanzen
+            </Links>
+          <nav
+            className="flex flex-wrap items-center justify-center gap-4 text-[0.65rem] uppercase tracking-[0.3em] text-slate-300"
+            aria-label="Primary"
           >
-            {LOCALE_OPTIONS.map((option) => {
-              const isActive = locale === option.value;
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => handleLocaleChange(option.value)}
-                  aria-pressed={isActive}
-                  className={`px-2 py-1 text-xs font-semibold border rounded transition ${
-                    isActive
-                      ? "bg-white text-blue-700 border-white"
-                      : "text-white border-white/60 hover:border-white hover:bg-white/10"
-                  }`}
-                >
-                  {option.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </header>
-
-      {/* Hero-Section */}
-      <main className="relative overflow-hidden h-[50vh] flex items-center justify-center text-center">
-        <Starfield count={300} seed={123} />
-        <div className="relative z-10 fade-in">
-          <h1 className="text-green-500 text-7xl mb-4 animate-pulse">
-            {copy.hero.greeting}
-          </h1>
-          <p className="text-5xl">{copy.hero.intro}</p>
-          <h2 className="text-6xl font-bold">{copy.hero.name}</h2>
-        </div>
-      </main>
-
-      {/* About */}
-      <section id="about" className="py-20 bg-gray-800">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {copy.about.title}
-          </h2>
-          <p className="text-center max-w-2xl mx-auto">{copy.about.intro}</p>
-          <div className="text-center max-w-2xl mx-auto mt-4">
-            <p>
-              <strong>{copy.about.birthdayLabel}</strong>{" "}
-              {copy.about.birthdayValue}
-            </p>
-            <p>
-              <strong>{copy.about.locationLabel}</strong>{" "}
-              {copy.about.locationValue}
-            </p>
-            <div className="flex justify-center mt-4">
-              <strong className="mr-4">{copy.about.hobbiesLabel}</strong>
-              <ul className="list-none text-left">
-                {copy.about.hobbies.map((hobby, index) => {
-                  const icon = hobbyIcons[index];
-                  return (
-                    <li key={`${hobby}-${index}`}>
-                      {icon ? `${icon} ` : ""}
-                      {hobby}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certificates */}
-      <section id="certificates" className="py-20 bg-gray-900">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {copy.certificates.title}
-          </h2>
-          <div className="max-w-2xl mx-auto text-center">
-            <ul className="list-disc list-inside text-left">
-              {copy.certificates.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-6 text-center">
-              {copy.certificates.notePrefix}{" "}
+              <Link
+                to="about"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer transition hover:text-emerald-200"
+              >
+                {copy.nav.about}
+              </Link>
+              <Link
+                to="projects"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer transition hover:text-emerald-200"
+              >
+                {copy.nav.projects}
+              </Link>
+              <Link
+                to="skills"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer transition hover:text-emerald-200"
+              >
+                {copy.nav.skills}
+              </Link>
+              <Link
+                to="certificates"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer transition hover:text-emerald-200"
+              >
+                {copy.nav.certificates}
+              </Link>
               <Link
                 to="contact"
                 smooth={true}
                 duration={500}
-                className="text-blue-400 hover:underline cursor-pointer"
+                className="cursor-pointer transition hover:text-emerald-200"
               >
-                {copy.certificates.noteLink}
+                {copy.nav.contact}
               </Link>
-              {copy.certificates.noteSuffix}
-            </p>
+            </nav>
+            <div
+              className="flex justify-center gap-2 md:justify-end"
+              role="group"
+              aria-label="Language"
+            >
+              {LOCALE_OPTIONS.map((option) => {
+                const isActive = locale === option.value;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => handleLocaleChange(option.value)}
+                    aria-pressed={isActive}
+                    className={`rounded-full border px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] transition ${
+                      isActive
+                        ? "border-emerald-200/70 bg-emerald-200/20 text-emerald-100"
+                        : "border-white/20 text-slate-200 hover:border-emerald-200/50 hover:text-emerald-100"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* Skills */}
-      <section id="skills" className="py-20 bg-gray-800">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {copy.skills.title}
-          </h2>
-          <div className="flex flex-wrap justify-center">
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <div
-                  key={index}
-                  className="group relative flex flex-col items-center m-4"
-                >
-                  <Icon className="text-6xl text-white" />
-                  <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 flex flex-col items-center mb-6">
-                    <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                      {skill.name}
-                    </span>
-                    <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                  </div>
+        <main id="content" tabIndex={-1}>
+          <section className="relative overflow-hidden px-6 pb-20 pt-16 md:pt-24">
+            <div className="absolute inset-0 opacity-40">
+              <Starfield count={220} seed={123} />
+            </div>
+            <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <p className="rise-in text-xs uppercase tracking-[0.35em] text-emerald-200/70">
+                  {copy.hero.greeting}
+                </p>
+                <h1 className="rise-in-delay font-display mt-4 text-4xl leading-tight text-white md:text-6xl">
+                  {copy.hero.intro}{" "}
+                  <span className="text-emerald-200">{copy.hero.name}</span>
+                </h1>
+                <p className="rise-in-delay-2 mt-4 text-lg text-slate-300">
+                  {copy.hero.role}
+                </p>
+                <p className="rise-in-delay-3 mt-4 text-base text-slate-400 md:text-lg">
+                  {copy.hero.summary}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link
+                    to="projects"
+                    smooth={true}
+                    duration={500}
+                    className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-200/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/20"
+                  >
+                    {copy.hero.ctaPrimary}
+                    <span className="text-base transition group-hover:translate-x-1">→</span>
+                  </Link>
+                  <Link
+                    to="contact"
+                    smooth={true}
+                    duration={500}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-slate-200 transition hover:border-emerald-200/60 hover:text-emerald-100"
+                  >
+                    {copy.hero.ctaSecondary}
+                  </Link>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section id="projects" className="py-20 bg-gray-900">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {copy.projects.title}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {copy.projects.items.map((project) => (
-              <div
-                key={project.title}
-                className="bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col h-full"
-              >
-                <div className="flex-grow">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="mb-4">{project.description}</p>
-                </div>
-                <div className="mt-auto flex justify-between items-center">
-                  {project.links.map((link) => (
-                    <a
-                      key={link.url}
-                      href={link.url}
-                      className="text-blue-400 hover:text-red-600"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {copy.hero.highlights.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-emerald-200/20 bg-emerald-200/10 px-4 py-1 text-[0.65rem] uppercase tracking-[0.25em] text-emerald-100/80"
                     >
-                      {link.label}
-                    </a>
+                      {item}
+                    </span>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Contact */}
-      <section id="contact" className="py-20 bg-gray-800">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {copy.contact.title}
-          </h2>
-          <div className="flex flex-wrap justify-center">
-            {contacts.map((contact, index) => {
-              const Icon = contact.icon;
-              return contact.type === "copy" ? (
-                <CopyToClipboard text={contact.value} key={index}>
-                  <div className="group relative flex flex-col items-center m-4 cursor-pointer bg-gray-700 p-4 rounded">
-                    <Icon className="text-6xl text-white" />
-                    <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 flex flex-col items-center mb-6">
-                      <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                        {contact.value}
+              <div className="relative">
+                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-emerald-400/30 via-transparent to-amber-300/30 blur-xl" />
+                <div className="relative rounded-3xl border border-white/10 bg-[#0b1311]/80 p-6 shadow-2xl">
+                  <p className="text-xs uppercase tracking-[0.4em] text-emerald-200/70">
+                    {copy.hero.panelTitle}
+                  </p>
+                  <div className="mt-6 grid gap-3">
+                    {copy.hero.meta.map((item) => (
+                      <div
+                        key={item.label}
+                        className="rounded-2xl border border-white/10 bg-black/40 px-4 py-3"
+                      >
+                        <p className="text-[0.6rem] uppercase tracking-[0.3em] text-slate-400">
+                          {item.label}
+                        </p>
+                        <p className="mt-2 text-sm text-emerald-100">
+                          {item.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="about" className="border-t border-white/5 px-6 py-20">
+            <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.1fr_0.9fr]">
+              <div className="reveal-up" data-animate data-delay="0">
+                <p className="text-xs uppercase tracking-[0.35em] text-emerald-200/70">
+                  {copy.about.kicker}
+                </p>
+                <h2 className="font-display mt-4 text-3xl text-white md:text-4xl">
+                  {copy.about.title}
+                </h2>
+                <p className="mt-4 text-base text-slate-300 md:text-lg">
+                  {copy.about.intro}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {copy.about.hobbies.map((hobby, index) => {
+                    const icon = hobbyIcons[index];
+                    return (
+                      <span
+                        key={`${hobby}-${index}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-4 py-2 text-sm text-slate-200"
+                      >
+                        <span>{icon}</span>
+                        {hobby}
                       </span>
-                      <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                    </div>
-                  </div>
-                </CopyToClipboard>
-              ) : (
-                <a
-                  href={contact.value}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={index}
-                  className="group relative flex flex-col items-center m-4 cursor-pointer bg-gray-700 p-4 rounded"
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div
+                  className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-4"
+                  data-animate
+                  data-delay="120"
                 >
-                  <Icon className="text-6xl text-white" />
-                  <div className="opacity-0 group-hover:opacity-100 absolute bottom-0 flex flex-col items-center mb-6">
-                    <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                      {contact.value}
-                    </span>
-                    <div className="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-slate-400">
+                    {copy.about.birthdayLabel}
+                  </p>
+                  <p className="mt-2 text-lg text-emerald-100">
+                    {copy.about.birthdayValue}
+                  </p>
+                </div>
+                <div
+                  className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-4"
+                  data-animate
+                  data-delay="220"
+                >
+                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-slate-400">
+                    {copy.about.locationLabel}
+                  </p>
+                  <p className="mt-2 text-lg text-emerald-100">
+                    {copy.about.locationValue}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      {/* Footer */}
-      <footer className="bg-blue-600 py-4">
-        <div className="container mx-auto text-center">
-          <p className="text-white">{copy.footer.copyright}</p>
-          <a href="/impressum" className="text-white hover:underline mx-2">
-            {copy.footer.imprint}
-          </a>
-          <a href="/datenschutz" className="text-white hover:underline mx-2">
-            {copy.footer.privacy}
-          </a>
-        </div>
-      </footer>
+          <section
+            id="projects"
+            className="border-t border-white/5 px-6 py-20"
+          >
+            <div className="mx-auto max-w-6xl">
+              <div
+                className="reveal-up flex flex-wrap items-end justify-between gap-6"
+                data-animate
+                data-delay="0"
+              >
+                <div>
+                  <h2 className="font-display text-3xl text-white md:text-4xl">
+                    {copy.projects.title}
+                  </h2>
+                  <p className="mt-2 text-sm uppercase tracking-[0.3em] text-emerald-200/70">
+                    {copy.projects.featuredTitle}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {copy.projects.featured.map((project, index) => {
+                  const Icon = PROJECT_ICONS[index] ?? FaCode;
+                  return (
+                    <div
+                      key={project.title}
+                      className="group reveal-up card-lift relative overflow-hidden rounded-2xl border border-white/10 bg-[#0b1311]/80 p-6"
+                      data-animate
+                      data-delay={index * 120}
+                    >
+                      <div className="absolute inset-0 opacity-0 transition group-hover:opacity-100 [background:radial-gradient(circle_at_top,rgba(94,242,214,0.2),transparent_65%)]" />
+                      <div className="relative">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[0.6rem] uppercase tracking-[0.3em] text-emerald-200/70">
+                            {project.focus}
+                          </span>
+                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/40 text-emerald-200">
+                            <Icon className="text-lg" aria-hidden="true" />
+                          </span>
+                        </div>
+                        <h3 className="font-display mt-4 text-2xl text-white">
+                          {project.title}
+                        </h3>
+                        <p className="mt-3 text-sm text-slate-300">
+                          {project.summary}
+                        </p>
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-slate-300"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="mt-6 flex flex-wrap gap-4 text-sm">
+                          {project.links.map((link) => (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              className="text-emerald-200 transition hover:text-amber-200"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`${project.title} ${link.label}`}
+                            >
+                              {link.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div
+                className="reveal-up mt-12 rounded-2xl border border-white/10 bg-[#0b1311]/60 p-6"
+                data-animate
+                data-delay="80"
+              >
+                <p className="text-[0.6rem] uppercase tracking-[0.3em] text-emerald-200/70">
+                  {copy.projects.moreTitle}
+                </p>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {copy.projects.more.map((project, index) => (
+                    <div
+                      key={project.title}
+                      className="reveal-up card-lift rounded-xl border border-white/10 bg-black/30 p-4"
+                      data-animate
+                      data-delay={index * 120}
+                    >
+                      <h3 className="font-display text-lg text-white">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-slate-300">
+                        {project.description}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-3 text-sm">
+                        {project.links.map((link) => (
+                          <a
+                            key={link.url}
+                            href={link.url}
+                            className="text-emerald-200 transition hover:text-amber-200"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${project.title} ${link.label}`}
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="skills" className="border-t border-white/5 px-6 py-20">
+            <div className="mx-auto max-w-6xl">
+              <div
+                className="reveal-up flex flex-wrap items-end justify-between gap-6"
+                data-animate
+                data-delay="0"
+              >
+                <div>
+                  <h2 className="font-display text-3xl text-white md:text-4xl">
+                    {copy.skills.title}
+                  </h2>
+                  <p className="mt-2 text-slate-400">{copy.skills.subtitle}</p>
+                </div>
+              </div>
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {copy.skills.groups.map((group, index) => (
+                  <div
+                    key={group.title}
+                    className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-6"
+                    data-animate
+                    data-delay={index * 140}
+                  >
+                    <p className="text-[0.65rem] uppercase tracking-[0.3em] text-emerald-200/70">
+                      {group.title}
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      {group.items.map((item) => {
+                        const Icon = SKILL_ICON_MAP[item] ?? FaCode;
+                        return (
+                          <li
+                            key={item}
+                            className="flex items-center gap-3 text-sm text-slate-200"
+                          >
+                            <Icon
+                              className="text-lg text-emerald-200"
+                              aria-hidden="true"
+                            />
+                            <span>{item}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="certificates"
+            className="border-t border-white/5 px-6 py-20"
+          >
+            <div className="mx-auto max-w-6xl">
+              <div
+                className="reveal-up flex flex-wrap items-end justify-between gap-6"
+                data-animate
+                data-delay="0"
+              >
+                <h2 className="font-display text-3xl text-white md:text-4xl">
+                  {copy.certificates.title}
+                </h2>
+              </div>
+              <div className="mt-10 grid gap-4 md:grid-cols-3">
+                {copy.certificates.items.map((item, index) => (
+                  <div
+                    key={item.title}
+                    className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-5"
+                    data-animate
+                    data-delay={index * 120}
+                  >
+                    <h3 className="font-display text-lg text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-slate-300">
+                      {item.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p
+                className="reveal-up mt-8 text-sm text-slate-300"
+                data-animate
+                data-delay="80"
+              >
+                {copy.certificates.notePrefix}{" "}
+                <Link
+                  to="contact"
+                  smooth={true}
+                  duration={500}
+                  className="text-emerald-200 transition hover:text-amber-200"
+                >
+                  {copy.certificates.noteLink}
+                </Link>
+                {copy.certificates.noteSuffix}
+              </p>
+            </div>
+          </section>
+
+          <section id="contact" className="border-t border-white/5 px-6 py-20">
+            <div className="mx-auto max-w-6xl">
+              <div
+                className="reveal-up relative overflow-hidden rounded-3xl border border-emerald-200/20 bg-[#0b1311]/80 p-8 md:p-10"
+                data-animate
+                data-delay="0"
+              >
+                <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(94,242,214,0.25),rgba(94,242,214,0))] blur-3xl" />
+                <div className="relative">
+                  <h2 className="font-display text-3xl text-white md:text-4xl">
+                    {copy.contact.title}
+                  </h2>
+                  <p className="mt-3 text-slate-300">{copy.contact.subtitle}</p>
+                  <div className="mt-8 grid gap-4 md:grid-cols-3">
+                    {contacts.map((contact) => {
+                      const Icon = contact.icon;
+                      if (contact.type === "copy") {
+                        return (
+                          <div
+                            key={contact.value}
+                            className="card-lift rounded-2xl border border-white/10 bg-black/40 p-4"
+                          >
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex items-start gap-3">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/40 text-emerald-200">
+                                  <Icon className="text-lg" aria-hidden="true" />
+                                </span>
+                                <div>
+                                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-slate-400">
+                                    {contact.label}
+                                  </p>
+                                  <p className="mt-2 text-sm text-slate-200">
+                                    {contact.value}
+                                  </p>
+                                </div>
+                              </div>
+                              <CopyToClipboard text={contact.value}>
+                                <button
+                                  type="button"
+                                  className="rounded-full border border-emerald-200/50 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/10"
+                                  aria-label={`Copy ${contact.label}`}
+                                >
+                                  {copy.contact.ctaCopy}
+                                </button>
+                              </CopyToClipboard>
+                            </div>
+                          </div>
+                        );
+                      }
+                      return (
+                        <a
+                          key={contact.value}
+                          href={contact.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="card-lift rounded-2xl border border-white/10 bg-black/40 p-4"
+                          aria-label={`Open ${contact.label}`}
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex items-start gap-3">
+                              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/40 text-emerald-200">
+                                <Icon className="text-lg" aria-hidden="true" />
+                              </span>
+                              <div>
+                                <p className="text-[0.6rem] uppercase tracking-[0.3em] text-slate-400">
+                                  {contact.label}
+                                </p>
+                                <p className="mt-2 text-sm text-slate-200">
+                                  {contact.value}
+                                </p>
+                              </div>
+                            </div>
+                            <span className="rounded-full border border-white/20 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-200 transition hover:border-emerald-200/60 hover:text-emerald-100">
+                              {copy.contact.ctaOpen}
+                            </span>
+                          </div>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer className="border-t border-white/10 px-6 py-6">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 text-sm text-slate-400">
+            <p>{copy.footer.copyright}</p>
+            <div className="flex gap-4">
+              <a href="/impressum" className="transition hover:text-emerald-200">
+                {copy.footer.imprint}
+              </a>
+              <a href="/datenschutz" className="transition hover:text-emerald-200">
+                {copy.footer.privacy}
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
