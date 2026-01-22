@@ -745,12 +745,18 @@ export default function HomePage({
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 text-sm text-slate-400">
             <p>{copy.footer.copyright}</p>
             <div className="flex gap-4">
-              <a href="/impressum" className="transition hover:text-emerald-200">
+              <Links
+                href="/impressum"
+                className="transition hover:text-emerald-200"
+              >
                 {copy.footer.imprint}
-              </a>
-              <a href="/datenschutz" className="transition hover:text-emerald-200">
+              </Links>
+              <Links
+                href="/datenschutz"
+                className="transition hover:text-emerald-200"
+              >
                 {copy.footer.privacy}
-              </a>
+              </Links>
             </div>
           </div>
         </footer>
