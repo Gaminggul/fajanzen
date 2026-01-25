@@ -234,10 +234,10 @@ export default function HomePage({
             >
               fajanzen
             </Links>
-          <nav
-            className="flex flex-wrap items-center justify-center gap-4 text-[0.65rem] uppercase tracking-[0.3em] text-slate-300"
-            aria-label="Primary"
-          >
+            <nav
+              className="flex flex-wrap items-center justify-center gap-4 text-[0.65rem] uppercase tracking-[0.3em] text-slate-300"
+              aria-label="Primary"
+            >
               <Link
                 to="about"
                 smooth={true}
@@ -292,11 +292,10 @@ export default function HomePage({
                     type="button"
                     onClick={() => handleLocaleChange(option.value)}
                     aria-pressed={isActive}
-                    className={`rounded-full border px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] transition ${
-                      isActive
-                        ? "border-emerald-200/70 bg-emerald-200/20 text-emerald-100"
-                        : "border-white/20 text-slate-200 hover:border-emerald-200/50 hover:text-emerald-100"
-                    }`}
+                    className={`rounded-full border px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] transition ${isActive
+                      ? "border-emerald-200/70 bg-emerald-200/20 text-emerald-100"
+                      : "border-white/20 text-slate-200 hover:border-emerald-200/50 hover:text-emerald-100"
+                      }`}
                   >
                     {option.label}
                   </button>
@@ -385,7 +384,7 @@ export default function HomePage({
 
           <section id="about" className="border-t border-white/5 px-6 py-20">
             <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.1fr_0.9fr]">
-              <div className="reveal-up" data-animate data-delay="0">
+              <div className="" data-animate data-delay="0">
                 <p className="text-xs uppercase tracking-[0.35em] text-emerald-200/70">
                   {copy.about.kicker}
                 </p>
@@ -412,7 +411,7 @@ export default function HomePage({
               </div>
               <div className="space-y-4">
                 <div
-                  className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-4"
+                  className="card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-4"
                   data-animate
                   data-delay="120"
                 >
@@ -424,7 +423,7 @@ export default function HomePage({
                   </p>
                 </div>
                 <div
-                  className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-4"
+                  className="card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-4"
                   data-animate
                   data-delay="220"
                 >
@@ -445,7 +444,7 @@ export default function HomePage({
           >
             <div className="mx-auto max-w-6xl">
               <div
-                className="reveal-up flex flex-wrap items-end justify-between gap-6"
+                className="flex flex-wrap items-end justify-between gap-6"
                 data-animate
                 data-delay="0"
               >
@@ -464,7 +463,7 @@ export default function HomePage({
                   return (
                     <div
                       key={project.title}
-                      className="group reveal-up card-lift relative overflow-hidden rounded-2xl border border-white/10 bg-[#0b1311]/80 p-6"
+                      className="group card-lift relative overflow-hidden rounded-2xl border border-white/10 bg-[#0b1311]/80 p-6"
                       data-animate
                       data-delay={index * 120}
                     >
@@ -515,7 +514,7 @@ export default function HomePage({
               </div>
 
               <div
-                className="reveal-up mt-12 rounded-2xl border border-white/10 bg-[#0b1311]/60 p-6"
+                className="mt-12 rounded-2xl border border-white/10 bg-[#0b1311]/60 p-6"
                 data-animate
                 data-delay="80"
               >
@@ -526,7 +525,7 @@ export default function HomePage({
                   {copy.projects.more.map((project, index) => (
                     <div
                       key={project.title}
-                      className="reveal-up card-lift rounded-xl border border-white/10 bg-black/30 p-4"
+                      className="card-lift rounded-xl border border-white/10 bg-black/30 p-4"
                       data-animate
                       data-delay={index * 120}
                     >
@@ -560,7 +559,7 @@ export default function HomePage({
           <section id="skills" className="border-t border-white/5 px-6 py-20">
             <div className="mx-auto max-w-6xl">
               <div
-                className="reveal-up flex flex-wrap items-end justify-between gap-6"
+                className="flex flex-wrap items-end justify-between gap-6"
                 data-animate
                 data-delay="0"
               >
@@ -575,7 +574,7 @@ export default function HomePage({
                 {copy.skills.groups.map((group, index) => (
                   <div
                     key={group.title}
-                    className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-6"
+                    className="card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-6"
                     data-animate
                     data-delay={index * 140}
                   >
@@ -611,7 +610,7 @@ export default function HomePage({
           >
             <div className="mx-auto max-w-6xl">
               <div
-                className="reveal-up flex flex-wrap items-end justify-between gap-6"
+                className="flex flex-wrap items-end justify-between gap-6"
                 data-animate
                 data-delay="0"
               >
@@ -623,7 +622,7 @@ export default function HomePage({
                 {copy.certificates.items.map((item, index) => (
                   <div
                     key={item.title}
-                    className="reveal-up card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-5"
+                    className="card-lift rounded-2xl border border-white/10 bg-[#0b1311]/80 p-5"
                     data-animate
                     data-delay={index * 120}
                   >
@@ -637,7 +636,7 @@ export default function HomePage({
                 ))}
               </div>
               <p
-                className="reveal-up mt-8 text-sm text-slate-300"
+                className="mt-8 text-sm text-slate-300"
                 data-animate
                 data-delay="80"
               >
@@ -658,7 +657,7 @@ export default function HomePage({
           <section id="contact" className="border-t border-white/5 px-6 py-20">
             <div className="mx-auto max-w-6xl">
               <div
-                className="reveal-up relative overflow-hidden rounded-3xl border border-emerald-200/20 bg-[#0b1311]/80 p-8 md:p-10"
+                className="relative overflow-hidden rounded-3xl border border-emerald-200/20 bg-[#0b1311]/80 p-8 md:p-10"
                 data-animate
                 data-delay="0"
               >
