@@ -1,19 +1,14 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import type { Metadata, Viewport } from "next";
-import { cookies, headers } from "next/headers";
 import { SEO } from "@/lib/site";
-import {
-  DEFAULT_LOCALE,
-  LOCALE_COOKIE,
-  LOCALE_HEADER,
-  isLocale,
-} from "../lib/locale";
+import { LangSync } from "@/lib/LangSync";
 
 const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-body",
   display: "swap",
 });
@@ -55,23 +50,13 @@ export const viewport: Viewport = {
   themeColor: "#050806",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const headerStore = await headers();
-  const cookieLocale = cookieStore.get(LOCALE_COOKIE)?.value;
-  const headerLocale = headerStore.get(LOCALE_HEADER);
-  const locale = isLocale(cookieLocale)
-    ? cookieLocale
-    : isLocale(headerLocale)
-    ? headerLocale
-    : DEFAULT_LOCALE;
-
   return (
-    <html lang={locale}>
+    <html lang="en">
       <body
         className={`${bodyFont.variable} ${displayFont.variable} overflow-x-hidden bg-[#050806] text-slate-100`}
       >
@@ -80,6 +65,8 @@ export default async function RootLayout({
         </a>
         <div className="w-full">{children}</div>
         <Analytics />
+        <SpeedInsights />
+        <LangSync />
       </body>
     </html>
   );

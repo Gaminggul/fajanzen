@@ -2,7 +2,6 @@
 
 import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useRouter } from "next/navigation";
 import Starfield from "./Starfield";
 import { type Locale, LOCALE_OPTIONS, handleLocaleChange } from "@/lib/locale";
@@ -84,7 +83,6 @@ export default function ServicesPage({
       <div className="relative z-10">
         <header className="sticky top-0 z-20 border-b border-white/10 bg-[#050806]/80 backdrop-blur">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-            <SpeedInsights />
             <Link
               href={`/${locale}`}
               className="font-display hidden text-sm uppercase tracking-[0.35em] text-emerald-200/90 md:flex"
@@ -158,7 +156,7 @@ export default function ServicesPage({
         <main id="content" tabIndex={-1}>
           <section className="relative overflow-hidden px-6 pb-16 pt-16 md:pt-24">
             <div className="absolute inset-0 opacity-40">
-              <Starfield count={200} seed={321} />
+              <Starfield count={100} seed={321} />
             </div>
             <div className="relative z-10 mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.1fr_0.9fr]">
               <div>

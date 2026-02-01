@@ -3,7 +3,6 @@
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useRouter } from "next/navigation";
 import type { IconType } from "react-icons";
 import { useScrollReveal } from "@/lib/useScrollReveal";
@@ -165,7 +164,6 @@ export default function HomePage({
       <div className="relative z-10">
         <header className="sticky top-0 z-20 border-b border-white/10 bg-[#050806]/80 backdrop-blur">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-            <SpeedInsights />
             <Link
               href={`/${locale}`}
               className="font-display hidden text-sm uppercase tracking-[0.35em] text-emerald-200/90 md:flex"
@@ -252,7 +250,7 @@ export default function HomePage({
         <main id="content" tabIndex={-1}>
           <section className="relative overflow-hidden px-6 pb-20 pt-16 md:pt-24">
             <div className="absolute inset-0 opacity-40">
-              <Starfield count={220} seed={123} />
+              <Starfield count={120} seed={123} />
             </div>
             <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
               <div>
