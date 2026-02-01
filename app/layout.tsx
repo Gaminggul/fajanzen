@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_SEO.description,
   applicationName: "fajanzen",
+  authors: [{ name: "Noel Janzen", url: "https://fajanzen.de" }],
   creator: "Noel Janzen",
   publisher: "Noel Janzen",
   category: "Technology",

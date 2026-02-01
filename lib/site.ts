@@ -84,18 +84,21 @@ export const SEO: Record<
   },
 } as const;
 
-export const SERVICES_SEO: Record<Locale, { title: string; description: string }> = {
+export const SERVICES_SEO: Record<Locale, { title: string; description: string; keywords: string[] }> = {
   de: {
     title: "Pakete & Leistungen",
-    description: "Pakete für Websites, Relaunches und Automatisierung.",
+    description: "Pakete für Websites, Relaunches und Automatisierung — vom Freelance Webentwickler Noel Janzen in Darmstadt.",
+    keywords: ["Webentwicklung Pakete", "Website erstellen lassen", "Freelance Webentwickler Darmstadt", "Startup Website", "Web-App Entwicklung", "Noel Janzen"],
   },
   en: {
     title: "Packages & Services",
-    description: "Packages for websites, relaunches, and automation.",
+    description: "Packages for websites, relaunches, and automation — by freelance web developer Noel Janzen in Darmstadt.",
+    keywords: ["web development packages", "website for startups", "freelance web developer", "web app development", "Noel Janzen", "Darmstadt"],
   },
   ru: {
     title: "Пакеты и услуги",
-    description: "Пакеты для сайтов, редизайна и автоматизации.",
+    description: "Пакеты для сайтов, редизайна и автоматизации — от фриланс-веб-разработчика Noel Janzen из Дармштадта.",
+    keywords: ["пакеты веб-разработки", "создание сайтов", "фриланс веб-разработчик", "веб-приложения", "Noel Janzen", "Дармштадт"],
   },
 } as const;
 

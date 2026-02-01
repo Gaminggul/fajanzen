@@ -104,10 +104,12 @@ export default async function Page({ params }: PageProps) {
     "@graph": [
       {
         "@type": "Person",
+        "@id": `${BASE_URL}/#person`,
         name: "Noel Janzen",
         url: BASE_URL,
         email: "mailto:noel@fajanzen.de",
         jobTitle: seo.jobTitle,
+        knowsAbout: ["Web Development", "React", "TypeScript", "Automation"],
         sameAs: [
           "https://github.com/Gaminggul",
           "https://www.instagram.com/drivenby.noel/",
@@ -122,25 +124,23 @@ export default async function Page({ params }: PageProps) {
       },
       {
         "@type": "WebSite",
+        "@id": `${BASE_URL}/#website`,
         name: "fajanzen",
         url: BASE_URL,
         inLanguage: LANGUAGE_TAG[locale],
-        publisher: {
-          "@type": "Person",
-          name: "Noel Janzen",
-        },
+        publisher: { "@id": `${BASE_URL}/#person` },
       },
       {
-        "@type": "WebPage",
+        "@type": "ProfilePage",
+        "@id": `${BASE_URL}/${locale}/#webpage`,
         name: seo.title,
         url: `${BASE_URL}/${locale}`,
         inLanguage: LANGUAGE_TAG[locale],
         description: seo.description,
         image: ogImage,
-        isPartOf: {
-          "@type": "WebSite",
-          url: BASE_URL,
-        },
+        isPartOf: { "@id": `${BASE_URL}/#website` },
+        about: { "@id": `${BASE_URL}/#person` },
+        mainEntity: { "@id": `${BASE_URL}/#person` },
       },
     ],
   };

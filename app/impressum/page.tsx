@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/impressum",
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function ImpressumPage() {

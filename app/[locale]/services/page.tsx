@@ -52,6 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: seo.title,
     description: seo.description,
+    keywords: seo.keywords,
     alternates: {
       canonical: `/${locale}/services`,
       languages: SERVICE_ALTERNATES,
@@ -104,6 +105,45 @@ export default async function Page({ params }: PageProps) {
 
   const copy = SERVICES[locale];
   const footer = TRANSLATIONS[locale].footer;
+  const seo = SERVICES_SEO[locale];
+  const ogImage = `${BASE_URL}/${locale}/opengraph-image`;
 
-  return <ServicesPage copy={copy} footer={footer} locale={locale} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${BASE_URL}/${locale}/services/#webpage`,
+        name: seo.title,
+        url: `${BASE_URL}/${locale}/services`,
+        inLanguage: LANGUAGE_TAG[locale],
+        description: seo.description,
+        image: ogImage,
+        isPartOf: { "@id": `${BASE_URL}/#website` },
+      },
+      {
+        "@type": "Service",
+        "@id": `${BASE_URL}/${locale}/services/#service`,
+        name: seo.title,
+        description: seo.description,
+        provider: {
+          "@type": "Person",
+          "@id": `${BASE_URL}/#person`,
+          name: "Noel Janzen",
+        },
+        areaServed: "DE",
+        serviceType: "Web Development",
+      },
+    ],
+  };
+
+  return (
+    <>
+      <ServicesPage copy={copy} footer={footer} locale={locale} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </>
+  );
 }
