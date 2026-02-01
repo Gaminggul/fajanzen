@@ -32,52 +32,70 @@ export const SEO: Record<
   }
 > = {
   de: {
-    title: "Noel Janzen — Web-Apps & Automatisierung",
+    title: "Noel Janzen — Websites & Web-Apps für Startups",
     description:
-      "Portfolio von Noel Janzen, dualer Informatikstudent in Darmstadt. Web-Apps, Automatisierung, Tools und Projekte.",
+      "Portfolio von Noel Janzen, dualer Informatikstudent und Freelance Webentwickler in Darmstadt. Websites, Web-Apps und Automatisierung.",
     keywords: [
       "Noel Janzen",
       "Portfolio",
+      "Websites",
       "Web-Apps",
-      "Automatisierung",
+      "Freelance Webentwickler",
       "TypeScript",
       "React",
       "Darmstadt",
     ],
-    jobTitle: "Dualer Informatikstudent",
-    tagline: "Web-Apps & Automatisierung",
+    jobTitle: "Freelance Webentwickler · Dualer Informatikstudent",
+    tagline: "Websites & Web-Apps",
   },
   en: {
-    title: "Noel Janzen — Web Apps & Automation",
+    title: "Noel Janzen — Websites & Web Apps for Startups",
     description:
-      "Portfolio of Noel Janzen, dual study CS student in Darmstadt. Web apps, automation, tools, and projects.",
+      "Portfolio of Noel Janzen, dual CS student and freelance web developer in Darmstadt. Websites, web apps, and automation.",
     keywords: [
       "Noel Janzen",
       "portfolio",
+      "websites",
       "web apps",
-      "automation",
+      "freelance web developer",
       "TypeScript",
       "React",
       "Darmstadt",
     ],
-    jobTitle: "Dual study computer science student",
-    tagline: "Web Apps & Automation",
+    jobTitle: "Freelance Web Developer · Dual CS Student",
+    tagline: "Websites & Web Apps",
   },
   ru: {
-    title: "Noel Janzen — Веб-приложения и автоматизация",
+    title: "Noel Janzen — Сайты и веб-приложения для стартапов",
     description:
-      "Портфолио Noel Janzen, студент дуальной программы по информатике в Дармштадте. Веб-приложения, автоматизация, инструменты и проекты.",
+      "Портфолио Noel Janzen, студент дуальной программы и фриланс-веб-разработчик из Дармштадта. Сайты, веб-приложения и автоматизация.",
     keywords: [
       "Noel Janzen",
       "портфолио",
+      "сайты",
       "веб-приложения",
-      "автоматизация",
+      "фриланс веб-разработчик",
       "TypeScript",
       "React",
       "Дармштадт",
     ],
-    jobTitle: "Студент дуальной программы по информатике",
-    tagline: "Веб-приложения и автоматизация",
+    jobTitle: "Фриланс-веб-разработчик · Студент дуальной программы",
+    tagline: "Сайты и веб-приложения",
+  },
+} as const;
+
+export const SERVICES_SEO: Record<Locale, { title: string; description: string }> = {
+  de: {
+    title: "Pakete & Leistungen",
+    description: "Pakete für Websites, Relaunches und Automatisierung.",
+  },
+  en: {
+    title: "Packages & Services",
+    description: "Packages for websites, relaunches, and automation.",
+  },
+  ru: {
+    title: "Пакеты и услуги",
+    description: "Пакеты для сайтов, редизайна и автоматизации.",
   },
 } as const;
 
@@ -85,6 +103,7 @@ export const TRANSLATIONS = {
   de: {
     nav: {
       about: "Über",
+      services: "Pakete",
       certificates: "Zertifikate",
       skills: "Skills",
       projects: "Projekte",
@@ -94,30 +113,30 @@ export const TRANSLATIONS = {
       greeting: "Hi!",
       intro: "Ich bin",
       name: "Noel Janzen",
-      role: "Dualer Informatikstudent · Web-Apps · Automatisierung",
+      role: "Freelance Webentwickler · Websites & Web-Apps",
       summary:
-        "Ich baue klare, schnelle Web-Erlebnisse und kleine Tools, die Arbeit vereinfachen.",
-      ctaPrimary: "Projekte ansehen",
-      ctaSecondary: "Kontakt",
+        "Ich unterstütze Startups und kleine Unternehmen mit klaren, schnellen Websites — von der Idee bis zum Launch.",
+      ctaPrimary: "Pakete ansehen",
+      ctaSecondary: "Projekt anfragen",
       highlights: [
-        "Web-Apps & Interfaces",
+        "Websites für Startups",
+        "Relaunch & Performance",
         "Automation & Tooling",
-        "Clean Code & Performance",
       ],
-      panelTitle: "Fokus",
+      panelTitle: "Auf einen Blick",
       meta: [
         {
-          label: "Aktuell in",
+          label: "Standort",
           value: "Darmstadt, Hessen",
         },
-        { label: "Stack", value: "TypeScript · React · Docker" },
+        { label: "Fokus", value: "Websites · Web-Apps · Automationen" },
       ],
     },
     about: {
-      kicker: "Kurzprofil",
+      kicker: "Persönlich",
       title: "Über mich",
       intro:
-        "Hey, ich bin Noel. Ich studiere Informatik im dualen Studium und liebe Projekte, die komplexe Dinge einfach machen.",
+        "Ich bin Noel, dualer Informatikstudent und Freelancer. Ich mag klare Kommunikation, strukturierte Abläufe und Lösungen, die sich langfristig gut pflegen lassen.",
       birthdayLabel: "Geburtstag",
       birthdayValue: "19.04.2006",
       locationLabel: "Standort",
@@ -154,7 +173,7 @@ export const TRANSLATIONS = {
     },
     skills: {
       title: "Skills",
-      subtitle: "Was ich gerne baue",
+      subtitle: "Technik, mit der ich arbeite",
       groups: [
         {
           title: "Frontend & UI",
@@ -177,7 +196,7 @@ export const TRANSLATIONS = {
         {
           title: "Server Management Scripts",
           summary:
-            "Automatisierte Verwaltung von Minecraft-Servern für Routineaufgaben, Starts und Pflege.",
+            "Automatisierte Start/Stop, Backups und Updates für Minecraft-Server — spart Zeit bei Routineaufgaben.",
           focus: "Automation & Ops",
           tags: ["Scripting", "Server", "Maintenance"],
           links: [
@@ -190,7 +209,7 @@ export const TRANSLATIONS = {
         {
           title: "Angsthase",
           summary:
-            "Party-Webapp mit den Fragen aus dem Kartenspiel „Angsthase“ – schnell, simpel, spaßig.",
+            "Party-Webapp mit den Fragen aus dem Kartenspiel „Angsthase“ — mobil schnell startklar.",
           focus: "Web App",
           tags: ["Party Game", "UI", "Frontend"],
           links: [
@@ -200,7 +219,7 @@ export const TRANSLATIONS = {
         {
           title: "PokerCats",
           summary:
-            "Webbasiertes Pokerspiel mit klarer Oberfläche und Spiellogik.",
+            "Webbasiertes Pokerspiel mit klarer Oberfläche, Spielrunden und Logik.",
           focus: "Web Game",
           tags: ["Game Logic", "UI", "Web"],
           links: [
@@ -208,12 +227,12 @@ export const TRANSLATIONS = {
           ],
         },
       ],
-      moreTitle: "Weitere Builds",
+      moreTitle: "Weitere Projekte",
       more: [
         {
           title: "Portfolio Website",
           description:
-            "Meine persönliche Portfolio-Website für Skills, Projekte und Kontakt.",
+            "Meine Portfolio-Website mit Infos, Projekten und Kontakt.",
           links: [
             { label: "GitHub", url: "https://github.com/Gaminggul/njwebsite" },
             { label: "Website öffnen", url: "https://fajanzen.de" },
@@ -233,8 +252,8 @@ export const TRANSLATIONS = {
       ],
     },
     contact: {
-      title: "Kontakt",
-      subtitle: "Lass uns über Projekte, Praktika oder Ideen sprechen.",
+      title: "Projekt anfragen",
+      subtitle: "Erzähl mir kurz, worum es geht — ich melde mich schnell zurück.",
       ctaCopy: "E-Mail kopieren",
       ctaOpen: "Öffnen",
     },
@@ -247,6 +266,7 @@ export const TRANSLATIONS = {
   en: {
     nav: {
       about: "About",
+      services: "Packages",
       certificates: "Certificates",
       skills: "Skills",
       projects: "Projects",
@@ -256,30 +276,30 @@ export const TRANSLATIONS = {
       greeting: "Hi!",
       intro: "I'm",
       name: "Noel Janzen",
-      role: "Dual study CS · Web apps · Automation",
+      role: "Freelance Web Developer · Websites & Web Apps",
       summary:
-        "I build crisp, fast web experiences and small tools that remove friction.",
-      ctaPrimary: "View projects",
-      ctaSecondary: "Get in touch",
+        "I help startups and small teams with clear, fast websites — from idea to launch.",
+      ctaPrimary: "View packages",
+      ctaSecondary: "Start a project",
       highlights: [
-        "Web apps & interfaces",
+        "Websites for startups",
+        "Relaunch & performance",
         "Automation & tooling",
-        "Clean code & performance",
       ],
-      panelTitle: "Focus",
+      panelTitle: "At a glance",
       meta: [
         {
-          label: "Currently in",
+          label: "Location",
           value: "Darmstadt, Hesse",
         },
-        { label: "Stack", value: "TypeScript · React · Docker" },
+        { label: "Focus", value: "Websites · Web Apps · Automation" },
       ],
     },
     about: {
-      kicker: "Snapshot",
+      kicker: "Personal",
       title: "About",
       intro:
-        "Hi, I'm Noel. I'm currently doing a dual study program in computer science and enjoy projects that make complex things feel simple.",
+        "I'm Noel, a dual CS student and freelance developer. I value clear communication, structured workflows, and solutions that stay easy to maintain.",
       birthdayLabel: "Birthday",
       birthdayValue: "19.04.2006",
       locationLabel: "Location",
@@ -316,7 +336,7 @@ export const TRANSLATIONS = {
     },
     skills: {
       title: "Skills",
-      subtitle: "What I like building",
+      subtitle: "Tech I work with",
       groups: [
         {
           title: "Frontend & UI",
@@ -339,7 +359,7 @@ export const TRANSLATIONS = {
         {
           title: "Server Management Scripts",
           summary:
-            "Automated Minecraft server management for routine tasks, starts, and maintenance.",
+            "Automated start/stop, backups, and updates for Minecraft servers — saves time on routine tasks.",
           focus: "Automation & Ops",
           tags: ["Scripting", "Servers", "Maintenance"],
           links: [
@@ -352,7 +372,7 @@ export const TRANSLATIONS = {
         {
           title: "Angsthase",
           summary:
-            "Party web app with questions from the card game “Angsthase” — quick, simple, fun.",
+            "Party web app with questions from the card game “Angsthase” — quick to start on mobile.",
           focus: "Web App",
           tags: ["Party Game", "UI", "Frontend"],
           links: [
@@ -361,7 +381,8 @@ export const TRANSLATIONS = {
         },
         {
           title: "PokerCats",
-          summary: "Web-based poker game with a clean interface and game logic.",
+          summary:
+            "Web-based poker game with a clean interface, rounds, and game logic.",
           focus: "Web Game",
           tags: ["Game Logic", "UI", "Web"],
           links: [
@@ -369,12 +390,12 @@ export const TRANSLATIONS = {
           ],
         },
       ],
-      moreTitle: "More builds",
+      moreTitle: "More projects",
       more: [
         {
           title: "Portfolio Website",
           description:
-            "My personal portfolio website for skills, projects, and contact.",
+            "My portfolio website with info, projects, and contact details.",
           links: [
             { label: "GitHub", url: "https://github.com/Gaminggul/njwebsite" },
             { label: "Open website", url: "https://fajanzen.de" },
@@ -393,8 +414,8 @@ export const TRANSLATIONS = {
       ],
     },
     contact: {
-      title: "Contact",
-      subtitle: "Let’s talk about projects, internships, or ideas.",
+      title: "Start a project",
+      subtitle: "Tell me what you need and I’ll get back quickly.",
       ctaCopy: "Copy email",
       ctaOpen: "Open",
     },
@@ -407,6 +428,7 @@ export const TRANSLATIONS = {
   ru: {
     nav: {
       about: "Обо мне",
+      services: "Пакеты",
       certificates: "Сертификаты",
       skills: "Навыки",
       projects: "Проекты",
@@ -416,30 +438,30 @@ export const TRANSLATIONS = {
       greeting: "Привет!",
       intro: "Я",
       name: "Noel Janzen",
-      role: "Дуальная программа · Веб-приложения · Автоматизация",
+      role: "Фриланс-веб-разработчик · Сайты и веб-приложения",
       summary:
-        "Делаю быстрые и аккуратные веб-интерфейсы и инструменты, которые упрощают работу.",
-      ctaPrimary: "Смотреть проекты",
-      ctaSecondary: "Связаться",
+        "Помогаю стартапам и небольшим компаниям с понятными и быстрыми сайтами — от идеи до запуска.",
+      ctaPrimary: "Смотреть пакеты",
+      ctaSecondary: "Запросить проект",
       highlights: [
-        "Веб-приложения и интерфейсы",
+        "Сайты для стартапов",
+        "Редизайн и производительность",
         "Автоматизация и инструменты",
-        "Чистый код и производительность",
       ],
-      panelTitle: "Фокус",
+      panelTitle: "Коротко",
       meta: [
         {
-          label: "Сейчас",
+          label: "Локация",
           value: "Дармштадт, Гессен",
         },
-        { label: "Стек", value: "TypeScript · React · Docker" },
+        { label: "Фокус", value: "Сайты · Веб-приложения · Автоматизация" },
       ],
     },
     about: {
-      kicker: "Коротко",
+      kicker: "Личное",
       title: "Обо мне",
       intro:
-        "Привет, я Noel. Сейчас учусь по дуальной программе в области информатики и люблю проекты, которые делают сложное простым.",
+        "Я Noel, студент дуальной программы и фриланс-разработчик. Люблю чёткие коммуникации, структурированный процесс и решения, которые легко поддерживать.",
       birthdayLabel: "Дата рождения",
       birthdayValue: "19.04.2006",
       locationLabel: "Локация",
@@ -476,7 +498,7 @@ export const TRANSLATIONS = {
     },
     skills: {
       title: "Навыки",
-      subtitle: "Что мне нравится делать",
+      subtitle: "Технологии, с которыми я работаю",
       groups: [
         {
           title: "Фронтенд и UI",
@@ -499,7 +521,7 @@ export const TRANSLATIONS = {
         {
           title: "Server Management Scripts",
           summary:
-            "Автоматизация управления Minecraft-серверами для рутинных задач и обслуживания.",
+            "Автоматизация запуска/остановки, бэкапов и обновлений Minecraft-серверов — экономит время на рутине.",
           focus: "Automation & Ops",
           tags: ["Scripting", "Servers", "Maintenance"],
           links: [
@@ -512,7 +534,7 @@ export const TRANSLATIONS = {
         {
           title: "Angsthase",
           summary:
-            "Веб-приложение для вечеринок с вопросами из карточной игры “Angsthase”.",
+            "Веб-приложение для вечеринок с вопросами из карточной игры “Angsthase” — быстро запускается на телефоне.",
           focus: "Web App",
           tags: ["Party Game", "UI", "Frontend"],
           links: [
@@ -521,7 +543,8 @@ export const TRANSLATIONS = {
         },
         {
           title: "PokerCats",
-          summary: "Веб-покер с аккуратным интерфейсом и логикой игры.",
+          summary:
+            "Веб-покер с аккуратным интерфейсом, раундами и игровой логикой.",
           focus: "Web Game",
           tags: ["Game Logic", "UI", "Web"],
           links: [
@@ -533,7 +556,7 @@ export const TRANSLATIONS = {
       more: [
         {
           title: "Portfolio Website",
-          description: "Мой личный сайт-портфолио с проектами и контактами.",
+          description: "Мой сайт-портфолио с проектами и контактами.",
           links: [
             { label: "GitHub", url: "https://github.com/Gaminggul/njwebsite" },
             { label: "Открыть сайт", url: "https://fajanzen.de" },
@@ -552,8 +575,8 @@ export const TRANSLATIONS = {
       ],
     },
     contact: {
-      title: "Контакты",
-      subtitle: "Давайте обсудим проекты, стажировки или идеи.",
+      title: "Запросить проект",
+      subtitle: "Коротко опишите задачу — отвечу быстро.",
       ctaCopy: "Скопировать email",
       ctaOpen: "Открыть",
     },
@@ -561,6 +584,348 @@ export const TRANSLATIONS = {
       copyright: "© 2026 Noel Janzen",
       imprint: "Импрессум",
       privacy: "Политика конфиденциальности",
+    },
+  },
+} as const;
+
+export const SERVICES = {
+  de: {
+    nav: {
+      packages: "Pakete",
+      process: "Ablauf",
+      faq: "FAQ",
+      contact: "Kontakt",
+    },
+    hero: {
+      title: "Pakete & Leistungen",
+      subtitle: "Klare Websites für Startups und kleine Unternehmen.",
+      intro:
+        "Wähle ein Paket als Startpunkt — ich passe es bei Bedarf an dein Projekt an.",
+      ctaPrimary: "Projekt anfragen",
+      ctaSecondary: "Portfolio ansehen",
+      highlights: [
+        "Fester Rahmen",
+        "Transparente Kommunikation",
+        "Schneller Launch",
+      ],
+    },
+    packages: {
+      title: "Pakete",
+      subtitle: "Grobe Orientierung – finaler Umfang nach kurzem Call.",
+      items: [
+        {
+          name: "Starter Site",
+          summary: "Eine klare Präsenz, die dein Angebot verständlich macht.",
+          idealFor: "Ideal für neue Produkte, Landingpages, MVPs.",
+          details: [
+            "1–4 Seiten",
+            "Design + Umsetzung",
+            "Basis-SEO & Performance",
+            "Kontaktformular",
+          ],
+        },
+        {
+          name: "Growth Site",
+          summary: "Mehr Tiefe, Content und Struktur für wachsende Teams.",
+          idealFor: "Ideal für Startups mit mehreren Angeboten.",
+          details: [
+            "5–10 Seiten",
+            "CMS für Inhalte",
+            "Blog/Insights",
+            "Tracking-Setup",
+          ],
+        },
+        {
+          name: "Custom Build",
+          summary: "Individuelle Web-App oder Automations-Setup.",
+          idealFor: "Ideal für spezielle Anforderungen oder Workflows.",
+          details: [
+            "Individuelles Konzept",
+            "Integrationen & APIs",
+            "Automationen",
+            "Langfristige Betreuung",
+          ],
+        },
+      ],
+    },
+    addons: {
+      title: "Add-ons",
+      items: [
+        "Wartung & Updates",
+        "Hosting & Domain Setup",
+        "Newsletter & CRM",
+        "Analytics & Tracking",
+        "Performance-Audit",
+      ],
+    },
+    process: {
+      title: "So läuft’s ab",
+      steps: [
+        {
+          title: "Kennenlernen & Ziel",
+          description: "Kurzer Call, Anforderungen und grobe Timeline.",
+        },
+        {
+          title: "Konzept & Umsetzung",
+          description: "Struktur, Design und Build in schnellen Iterationen.",
+        },
+        {
+          title: "Launch & Pflege",
+          description: "Go-live, Feinschliff und optional Betreuung.",
+        },
+      ],
+    },
+    faq: {
+      title: "FAQ",
+      items: [
+        {
+          question: "Wie schnell kannst du starten?",
+          answer:
+            "Je nach Auslastung. Schreib mir kurz, dann sage ich dir ehrlich einen Starttermin.",
+        },
+        {
+          question: "Hast du feste Preise?",
+          answer:
+            "Die Pakete geben Orientierung, der endgültige Preis hängt vom Umfang ab.",
+        },
+        {
+          question: "Kannst du bestehende Websites übernehmen?",
+          answer:
+            "Ja — gern mit kurzem Audit und klaren Verbesserungsvorschlägen.",
+        },
+      ],
+    },
+    contact: {
+      title: "Lass uns starten",
+      subtitle:
+        "Schick mir 2–3 Sätze zu deinem Projekt, dann melde ich mich.",
+      ctaPrimary: "E-Mail schreiben",
+      ctaSecondary: "Zurück zum Portfolio",
+    },
+  },
+  en: {
+    nav: {
+      packages: "Packages",
+      process: "Process",
+      faq: "FAQ",
+      contact: "Contact",
+    },
+    hero: {
+      title: "Packages & Services",
+      subtitle: "Clear, fast websites for startups and small teams.",
+      intro:
+        "Pick a package as a starting point — I’ll tailor it to your project.",
+      ctaPrimary: "Start a project",
+      ctaSecondary: "See portfolio",
+      highlights: [
+        "Clear scope",
+        "Transparent communication",
+        "Fast launch",
+      ],
+    },
+    packages: {
+      title: "Packages",
+      subtitle: "A starting point — final scope after a short call.",
+      items: [
+        {
+          name: "Starter Site",
+          summary: "A crisp presence that explains your offer.",
+          idealFor: "Great for new products, landing pages, MVPs.",
+          details: [
+            "1–4 pages",
+            "Design + build",
+            "Basic SEO & performance",
+            "Contact form",
+          ],
+        },
+        {
+          name: "Growth Site",
+          summary: "More depth, content, and structure for growing teams.",
+          idealFor: "Great for startups with multiple offerings.",
+          details: [
+            "5–10 pages",
+            "CMS for content",
+            "Blog/insights",
+            "Tracking setup",
+          ],
+        },
+        {
+          name: "Custom Build",
+          summary: "Custom web app or automation setup.",
+          idealFor: "Best for unique requirements or workflows.",
+          details: [
+            "Custom concept",
+            "Integrations & APIs",
+            "Automation",
+            "Ongoing support",
+          ],
+        },
+      ],
+    },
+    addons: {
+      title: "Add-ons",
+      items: [
+        "Maintenance & updates",
+        "Hosting & domain setup",
+        "Newsletter & CRM",
+        "Analytics & tracking",
+        "Performance audit",
+      ],
+    },
+    process: {
+      title: "How it works",
+      steps: [
+        {
+          title: "Discovery & goals",
+          description: "Short call, requirements, and a rough timeline.",
+        },
+        {
+          title: "Concept & build",
+          description: "Structure, design, and build in quick iterations.",
+        },
+        {
+          title: "Launch & support",
+          description: "Go live, polish, and optional support.",
+        },
+      ],
+    },
+    faq: {
+      title: "FAQ",
+      items: [
+        {
+          question: "How fast can you start?",
+          answer:
+            "Depends on capacity — message me and I’ll share the next available slot.",
+        },
+        {
+          question: "Do you have fixed prices?",
+          answer: "Packages are a guideline; final price depends on scope.",
+        },
+        {
+          question: "Can you take over existing websites?",
+          answer:
+            "Yes — I can run a quick audit and suggest clear improvements.",
+        },
+      ],
+    },
+    contact: {
+      title: "Let’s build",
+      subtitle: "Send 2–3 lines about your project and I’ll get back to you.",
+      ctaPrimary: "Send an email",
+      ctaSecondary: "Back to portfolio",
+    },
+  },
+  ru: {
+    nav: {
+      packages: "Пакеты",
+      process: "Процесс",
+      faq: "FAQ",
+      contact: "Контакты",
+    },
+    hero: {
+      title: "Пакеты и услуги",
+      subtitle: "Понятные и быстрые сайты для стартапов и небольших команд.",
+      intro:
+        "Выберите пакет как старт — адаптирую под ваш проект.",
+      ctaPrimary: "Запросить проект",
+      ctaSecondary: "Смотреть портфолио",
+      highlights: [
+        "Чёткий объём",
+        "Прозрачная коммуникация",
+        "Быстрый запуск",
+      ],
+    },
+    packages: {
+      title: "Пакеты",
+      subtitle: "Стартовая точка — финальный объём после короткого звонка.",
+      items: [
+        {
+          name: "Starter Site",
+          summary: "Аккуратный сайт, который понятно объясняет ваше предложение.",
+          idealFor: "Подходит для новых продуктов, лендингов, MVP.",
+          details: [
+            "1–4 страницы",
+            "Дизайн + разработка",
+            "Базовое SEO и скорость",
+            "Форма контакта",
+          ],
+        },
+        {
+          name: "Growth Site",
+          summary: "Больше контента и структуры для растущих команд.",
+          idealFor: "Подходит стартапам с несколькими направлениями.",
+          details: [
+            "5–10 страниц",
+            "CMS для контента",
+            "Блог/инсайты",
+            "Настройка аналитики",
+          ],
+        },
+        {
+          name: "Custom Build",
+          summary: "Индивидуальное веб-приложение или автоматизация.",
+          idealFor: "Лучше всего для нестандартных требований.",
+          details: [
+            "Индивидуальная концепция",
+            "Интеграции и API",
+            "Автоматизация",
+            "Поддержка",
+          ],
+        },
+      ],
+    },
+    addons: {
+      title: "Дополнительно",
+      items: [
+        "Поддержка и обновления",
+        "Хостинг и домен",
+        "Newsletter и CRM",
+        "Аналитика и трекинг",
+        "Аудит производительности",
+      ],
+    },
+    process: {
+      title: "Как проходит работа",
+      steps: [
+        {
+          title: "Знакомство и цели",
+          description: "Короткий созвон, цели и ориентир по срокам.",
+        },
+        {
+          title: "Концепт и разработка",
+          description: "Структура, дизайн и реализация.",
+        },
+        {
+          title: "Запуск и поддержка",
+          description: "Публикация, полировка и опциональная поддержка.",
+        },
+      ],
+    },
+    faq: {
+      title: "FAQ",
+      items: [
+        {
+          question: "Когда можете начать?",
+          answer:
+            "Зависит от загрузки — напишите, и я скажу ближайшее окно.",
+        },
+        {
+          question: "Есть фиксированные цены?",
+          answer:
+            "Пакеты дают ориентир; итоговая стоимость зависит от объёма.",
+        },
+        {
+          question: "Можете взять уже существующий сайт?",
+          answer:
+            "Да — проведу аудит и предложу понятные улучшения.",
+        },
+      ],
+    },
+    contact: {
+      title: "Давайте начнём",
+      subtitle: "Опишите проект в 2–3 предложениях — отвечу быстро.",
+      ctaPrimary: "Написать на почту",
+      ctaSecondary: "Назад к портфолио",
     },
   },
 } as const;
