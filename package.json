@@ -4,21 +4,16 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.97",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.1",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.0.12",
-    "functional-utilities": "^3.8.0",
     "next": "15.5.8",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-icons": "^5.2.1",
-    "react-router-dom": "^7.9.4",
     "react-scroll": "^1.9.0",
-    "tailwindcss-animate": "^1.0.7",
-    "web-vitals": "^2.1.4"
+    "tailwindcss-animate": "^1.0.7"
   },
   "scripts": {
     "start": "next start",
@@ -52,8 +47,6 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20.12.12",
     "@types/react-copy-to-clipboard": "^5.0.7",
-    "@types/react-helmet": "^6.1.11",
-    "@types/react-icons": "^2.2.7",
     "@types/react-scroll": "^1.8.10",
     "autoprefixer": "^10.4.21",
     "baseline-browser-mapping": "^2.9.15",

@@ -1,12 +1,13 @@
 "use client";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Link } from "react-scroll";
-import Links from "next/link";
+import { Link as ScrollLink } from "react-scroll";
+import Link from "next/link";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import type { IconType } from "react-icons";
+import { useScrollReveal } from "@/lib/useScrollReveal";
+import { type Locale, LOCALE_OPTIONS, handleLocaleChange } from "@/lib/locale";
 import {
   FaReact,
   FaHtml5,
@@ -30,11 +31,11 @@ import {
   SiJavascript,
 } from "react-icons/si";
 import Starfield from "./Starfield";
-import { LOCALE_COOKIE, type Locale } from "@/lib/locale";
 
 type HomeCopy = {
   nav: {
     about: string;
+    services: string;
     certificates: string;
     skills: string;
     projects: string;
@@ -108,12 +109,6 @@ type HomeCopy = {
   };
 };
 
-const LOCALE_OPTIONS: Array<{ value: Locale; label: string }> = [
-  { value: "de", label: "DE" },
-  { value: "en", label: "EN" },
-  { value: "ru", label: "RU" },
-];
-
 const SKILL_ICON_MAP: Record<string, IconType> = {
   React: FaReact,
   Dart: SiDart,
@@ -157,67 +152,10 @@ export default function HomePage({
     },
   ];
 
-  const handleLocaleChange = (nextLocale: Locale) => {
-    if (nextLocale === locale) {
-      return;
-    }
-    document.cookie = `${LOCALE_COOKIE}=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
-    router.push(`/${nextLocale}`);
-  };
-
-  useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-animate]"),
-    );
-    if (elements.length === 0) {
-      return;
-    }
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-    if (prefersReduced.matches) {
-      elements.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      elements.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
-    );
-
-    elements.forEach((el) => {
-      const delay = el.dataset.delay;
-      if (delay) {
-        el.style.transitionDelay = `${delay}ms`;
-      }
-      observer.observe(el);
-    });
-
-    const fallbackTimer = window.setTimeout(() => {
-      elements.forEach((el) => el.classList.add("is-visible"));
-    }, 2000);
-
-    return () => {
-      window.clearTimeout(fallbackTimer);
-      observer.disconnect();
-    };
-  }, [locale]);
+  useScrollReveal(locale);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050806] text-slate-100">
+    <div className="relative min-h-screen overflow-clip bg-[#050806] text-slate-100">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(94,242,214,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(94,242,214,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(94,242,214,0.35),rgba(94,242,214,0))] blur-3xl" />
@@ -228,56 +166,62 @@ export default function HomePage({
         <header className="sticky top-0 z-20 border-b border-white/10 bg-[#050806]/80 backdrop-blur">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
             <SpeedInsights />
-            <Links
+            <Link
               href={`/${locale}`}
               className="font-display hidden text-sm uppercase tracking-[0.35em] text-emerald-200/90 md:flex"
             >
               fajanzen
-            </Links>
+            </Link>
             <nav
               className="flex flex-wrap items-center justify-center gap-4 text-[0.65rem] uppercase tracking-[0.3em] text-slate-300"
               aria-label="Primary"
             >
-              <Link
+              <ScrollLink
                 to="about"
                 smooth={true}
                 duration={500}
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.about}
-              </Link>
+              </ScrollLink>
               <Link
+                href={`/${locale}/services`}
+                className="cursor-pointer transition hover:text-emerald-200"
+              >
+                {copy.nav.services}
+              </Link>
+              <ScrollLink
                 to="projects"
                 smooth={true}
                 duration={500}
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.projects}
-              </Link>
-              <Link
+              </ScrollLink>
+              <ScrollLink
                 to="skills"
                 smooth={true}
                 duration={500}
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.skills}
-              </Link>
-              <Link
+              </ScrollLink>
+              <ScrollLink
                 to="certificates"
                 smooth={true}
                 duration={500}
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.certificates}
-              </Link>
-              <Link
+              </ScrollLink>
+              <ScrollLink
                 to="contact"
                 smooth={true}
                 duration={500}
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.contact}
-              </Link>
+              </ScrollLink>
             </nav>
             <div
               className="flex justify-center gap-2 md:justify-end"
@@ -290,7 +234,7 @@ export default function HomePage({
                   <button
                     key={option.value}
                     type="button"
-                    onClick={() => handleLocaleChange(option.value)}
+                    onClick={() => handleLocaleChange(option.value, locale, "", router.push)}
                     aria-pressed={isActive}
                     className={`rounded-full border px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] transition ${isActive
                       ? "border-emerald-200/70 bg-emerald-200/20 text-emerald-100"
@@ -327,22 +271,20 @@ export default function HomePage({
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   <Link
-                    to="projects"
-                    smooth={true}
-                    duration={500}
+                    href={`/${locale}/services`}
                     className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-200/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/20"
                   >
                     {copy.hero.ctaPrimary}
                     <span className="text-base transition group-hover:translate-x-1">→</span>
                   </Link>
-                  <Link
+                  <ScrollLink
                     to="contact"
                     smooth={true}
                     duration={500}
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-slate-200 transition hover:border-emerald-200/60 hover:text-emerald-100"
                   >
                     {copy.hero.ctaSecondary}
-                  </Link>
+                  </ScrollLink>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {copy.hero.highlights.map((item) => (
@@ -641,14 +583,14 @@ export default function HomePage({
                 data-delay="80"
               >
                 {copy.certificates.notePrefix}{" "}
-                <Link
+                <ScrollLink
                   to="contact"
                   smooth={true}
                   duration={500}
                   className="text-emerald-200 transition hover:text-amber-200"
                 >
                   {copy.certificates.noteLink}
-                </Link>
+                </ScrollLink>
                 {copy.certificates.noteSuffix}
               </p>
             </div>
@@ -744,18 +686,18 @@ export default function HomePage({
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 text-sm text-slate-400">
             <p>{copy.footer.copyright}</p>
             <div className="flex gap-4">
-              <Links
+              <Link
                 href="/impressum"
                 className="transition hover:text-emerald-200"
               >
                 {copy.footer.imprint}
-              </Links>
-              <Links
+              </Link>
+              <Link
                 href="/datenschutz"
                 className="transition hover:text-emerald-200"
               >
                 {copy.footer.privacy}
-              </Links>
+              </Link>
             </div>
           </div>
         </footer>

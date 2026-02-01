@@ -28,6 +28,25 @@ export function getLocaleFromCountry(country?: string | null): Locale | null {
   return COUNTRY_TO_LOCALE[key] ?? null;
 }
 
+export const LOCALE_OPTIONS: ReadonlyArray<{ value: Locale; label: string }> = [
+  { value: "de", label: "DE" },
+  { value: "en", label: "EN" },
+  { value: "ru", label: "RU" },
+];
+
+export function handleLocaleChange(
+  nextLocale: Locale,
+  currentLocale: Locale,
+  path: string,
+  push: (url: string) => void,
+) {
+  if (nextLocale === currentLocale) {
+    return;
+  }
+  document.cookie = `${LOCALE_COOKIE}=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
+  push(`/${nextLocale}${path}`);
+}
+
 export function getLocaleFromAcceptLanguage(
   header: string | null,
 ): Locale | null {

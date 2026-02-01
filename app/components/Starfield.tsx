@@ -3,7 +3,12 @@
 import { useMemo } from "react";
 import { makeStars } from "@/lib/random";
 
-export default function Starfield({ count = 120, seed = 123 }) {
+interface StarfieldProps {
+    count?: number;
+    seed?: number;
+}
+
+export default function Starfield({ count = 120, seed = 123 }: StarfieldProps) {
     const stars = useMemo(() => makeStars(count, seed), [count, seed]);
     return (
         <div
