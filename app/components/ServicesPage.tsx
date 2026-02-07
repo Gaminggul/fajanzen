@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Starfield from "./Starfield";
 import { type Locale, LOCALE_OPTIONS, handleLocaleChange } from "@/lib/locale";
 import { useScrollReveal } from "@/lib/useScrollReveal";
+import ContactForm from "./ContactForm";
 
 type ServicesCopy = {
   nav: {
@@ -27,6 +28,7 @@ type ServicesCopy = {
     subtitle: string;
     items: ReadonlyArray<{
       name: string;
+      price: string;
       summary: string;
       idealFor: string;
       details: ReadonlyArray<string>;
@@ -49,6 +51,14 @@ type ServicesCopy = {
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    form: {
+      nameLabel: string;
+      emailLabel: string;
+      messageLabel: string;
+      messagePlaceholder: string;
+      submitLabel: string;
+      orDirect: string;
+    };
   };
 };
 
@@ -68,7 +78,6 @@ export default function ServicesPage({
   locale: Locale;
 }) {
   const router = useRouter();
-  const email = "noel@fajanzen.de";
 
   useScrollReveal(locale);
 
@@ -242,6 +251,9 @@ export default function ServicesPage({
                     <h3 className="font-display text-2xl text-white">
                       {item.name}
                     </h3>
+                    <p className="mt-2 text-lg font-semibold text-emerald-200">
+                      {item.price}
+                    </p>
                     <p className="mt-3 text-sm text-slate-300">
                       {item.summary}
                     </p>
@@ -348,22 +360,7 @@ export default function ServicesPage({
                     {copy.contact.title}
                   </h2>
                   <p className="mt-3 text-slate-300">{copy.contact.subtitle}</p>
-                  <div className="mt-8 flex flex-wrap gap-4">
-                    <a
-                      href={`mailto:${email}`}
-                      className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-200/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/20"
-                    >
-                      {copy.contact.ctaPrimary}
-                      <span className="text-base transition group-hover:translate-x-1">→</span>
-                    </a>
-                    <Link
-                      href={`/${locale}#projects`}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-slate-200 transition hover:border-emerald-200/60 hover:text-emerald-100"
-                    >
-                      {copy.contact.ctaSecondary}
-                    </Link>
-                  </div>
-                  <p className="mt-6 text-sm text-slate-400">{email}</p>
+                  <ContactForm copy={copy.contact.form} />
                 </div>
               </div>
             </div>

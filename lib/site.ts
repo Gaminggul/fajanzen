@@ -259,6 +259,14 @@ export const TRANSLATIONS = {
       subtitle: "Erzähl mir kurz, worum es geht — ich melde mich schnell zurück.",
       ctaCopy: "E-Mail kopieren",
       ctaOpen: "Öffnen",
+      form: {
+        nameLabel: "Name",
+        emailLabel: "E-Mail",
+        messageLabel: "Nachricht",
+        messagePlaceholder: "Beschreib kurz dein Projekt, deine Ziele und Timeline...",
+        submitLabel: "Absenden",
+        orDirect: "Oder direkt an",
+      },
     },
     footer: {
       copyright: "© 2026 Noel Janzen",
@@ -418,9 +426,17 @@ export const TRANSLATIONS = {
     },
     contact: {
       title: "Start a project",
-      subtitle: "Tell me what you need and I’ll get back quickly.",
+      subtitle: "Tell me what you need and I'll get back quickly.",
       ctaCopy: "Copy email",
       ctaOpen: "Open",
+      form: {
+        nameLabel: "Name",
+        emailLabel: "Email",
+        messageLabel: "Message",
+        messagePlaceholder: "Briefly describe your project, goals, and timeline...",
+        submitLabel: "Send",
+        orDirect: "Or email directly:",
+      },
     },
     footer: {
       copyright: "© 2026 Noel Janzen",
@@ -582,6 +598,14 @@ export const TRANSLATIONS = {
       subtitle: "Коротко опишите задачу — отвечу быстро.",
       ctaCopy: "Скопировать email",
       ctaOpen: "Открыть",
+      form: {
+        nameLabel: "Имя",
+        emailLabel: "Email",
+        messageLabel: "Сообщение",
+        messagePlaceholder: "Коротко опишите проект, цели и сроки...",
+        submitLabel: "Отправить",
+        orDirect: "Или напрямую:",
+      },
     },
     footer: {
       copyright: "© 2026 Noel Janzen",
@@ -618,6 +642,7 @@ export const SERVICES = {
       items: [
         {
           name: "Starter Site",
+          price: "ab 800 €",
           summary: "Eine klare Präsenz, die dein Angebot verständlich macht.",
           idealFor: "Ideal für neue Produkte, Landingpages, MVPs.",
           details: [
@@ -629,6 +654,7 @@ export const SERVICES = {
         },
         {
           name: "Growth Site",
+          price: "ab 2.000 €",
           summary: "Mehr Tiefe, Content und Struktur für wachsende Teams.",
           idealFor: "Ideal für Startups mit mehreren Angeboten.",
           details: [
@@ -640,6 +666,7 @@ export const SERVICES = {
         },
         {
           name: "Custom Build",
+          price: "Auf Anfrage",
           summary: "Individuelle Web-App oder Automations-Setup.",
           idealFor: "Ideal für spezielle Anforderungen oder Workflows.",
           details: [
@@ -689,7 +716,7 @@ export const SERVICES = {
         {
           question: "Hast du feste Preise?",
           answer:
-            "Die Pakete geben Orientierung, der endgültige Preis hängt vom Umfang ab.",
+            "Die Startpreise siehst du oben bei den Paketen. Der endgültige Preis hängt vom konkreten Umfang ab — nach einem kurzen Call bekommst du ein transparentes Angebot.",
         },
         {
           question: "Kannst du bestehende Websites übernehmen?",
@@ -704,6 +731,14 @@ export const SERVICES = {
         "Schick mir 2–3 Sätze zu deinem Projekt, dann melde ich mich.",
       ctaPrimary: "E-Mail schreiben",
       ctaSecondary: "Zurück zum Portfolio",
+      form: {
+        nameLabel: "Name",
+        emailLabel: "E-Mail",
+        messageLabel: "Nachricht",
+        messagePlaceholder: "Beschreib kurz dein Projekt, deine Ziele und Timeline...",
+        submitLabel: "Absenden",
+        orDirect: "Oder direkt an",
+      },
     },
   },
   en: {
@@ -732,6 +767,7 @@ export const SERVICES = {
       items: [
         {
           name: "Starter Site",
+          price: "from €800",
           summary: "A crisp presence that explains your offer.",
           idealFor: "Great for new products, landing pages, MVPs.",
           details: [
@@ -743,6 +779,7 @@ export const SERVICES = {
         },
         {
           name: "Growth Site",
+          price: "from €2,000",
           summary: "More depth, content, and structure for growing teams.",
           idealFor: "Great for startups with multiple offerings.",
           details: [
@@ -754,6 +791,7 @@ export const SERVICES = {
         },
         {
           name: "Custom Build",
+          price: "On request",
           summary: "Custom web app or automation setup.",
           idealFor: "Best for unique requirements or workflows.",
           details: [
@@ -802,7 +840,7 @@ export const SERVICES = {
         },
         {
           question: "Do you have fixed prices?",
-          answer: "Packages are a guideline; final price depends on scope.",
+          answer: "Starting prices are listed with each package above. The final price depends on the exact scope — after a short call you'll get a transparent quote.",
         },
         {
           question: "Can you take over existing websites?",
@@ -812,10 +850,18 @@ export const SERVICES = {
       ],
     },
     contact: {
-      title: "Let’s build",
-      subtitle: "Send 2–3 lines about your project and I’ll get back to you.",
+      title: "Let's build",
+      subtitle: "Send 2–3 lines about your project and I'll get back to you.",
       ctaPrimary: "Send an email",
       ctaSecondary: "Back to portfolio",
+      form: {
+        nameLabel: "Name",
+        emailLabel: "Email",
+        messageLabel: "Message",
+        messagePlaceholder: "Briefly describe your project, goals, and timeline...",
+        submitLabel: "Send",
+        orDirect: "Or email directly:",
+      },
     },
   },
   ru: {
@@ -844,6 +890,7 @@ export const SERVICES = {
       items: [
         {
           name: "Starter Site",
+          price: "от 800 €",
           summary: "Аккуратный сайт, который понятно объясняет ваше предложение.",
           idealFor: "Подходит для новых продуктов, лендингов, MVP.",
           details: [
@@ -855,6 +902,7 @@ export const SERVICES = {
         },
         {
           name: "Growth Site",
+          price: "от 2 000 €",
           summary: "Больше контента и структуры для растущих команд.",
           idealFor: "Подходит стартапам с несколькими направлениями.",
           details: [
@@ -866,6 +914,7 @@ export const SERVICES = {
         },
         {
           name: "Custom Build",
+          price: "По запросу",
           summary: "Индивидуальное веб-приложение или автоматизация.",
           idealFor: "Лучше всего для нестандартных требований.",
           details: [
@@ -915,7 +964,7 @@ export const SERVICES = {
         {
           question: "Есть фиксированные цены?",
           answer:
-            "Пакеты дают ориентир; итоговая стоимость зависит от объёма.",
+            "Стартовые цены указаны у каждого пакета выше. Итоговая стоимость зависит от объёма — после короткого звонка вы получите прозрачное предложение.",
         },
         {
           question: "Можете взять уже существующий сайт?",
@@ -929,6 +978,14 @@ export const SERVICES = {
       subtitle: "Опишите проект в 2–3 предложениях — отвечу быстро.",
       ctaPrimary: "Написать на почту",
       ctaSecondary: "Назад к портфолио",
+      form: {
+        nameLabel: "Имя",
+        emailLabel: "Email",
+        messageLabel: "Сообщение",
+        messagePlaceholder: "Коротко опишите проект, цели и сроки...",
+        submitLabel: "Отправить",
+        orDirect: "Или напрямую:",
+      },
     },
   },
 } as const;
