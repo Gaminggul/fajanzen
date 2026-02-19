@@ -1,12 +1,5 @@
-"use client";
-
-import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type { IconType } from "react-icons";
-import { useScrollReveal } from "@/lib/useScrollReveal";
-import { type Locale, LOCALE_OPTIONS, handleLocaleChange } from "@/lib/locale";
-import ContactForm from "./ContactForm";
 import {
   FaReact,
   FaHtml5,
@@ -27,6 +20,10 @@ import {
   SiJavascript,
 } from "react-icons/si";
 import Starfield from "./Starfield";
+import ContactForm from "./ContactForm";
+import LocaleSwitcher from "./LocaleSwitcher";
+import ScrollRevealInit from "./ScrollRevealInit";
+import type { Locale } from "@/lib/locale";
 
 type HomeCopy = {
   nav: {
@@ -138,12 +135,9 @@ export default function HomePage({
   copy: HomeCopy;
   locale: Locale;
 }) {
-  const router = useRouter();
-
-  useScrollReveal(locale);
-
   return (
     <div className="relative min-h-screen overflow-clip bg-[#050806] text-slate-100">
+      <ScrollRevealInit locale={locale} />
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(94,242,214,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(94,242,214,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(94,242,214,0.35),rgba(94,242,214,0))] blur-3xl" />
@@ -163,76 +157,44 @@ export default function HomePage({
               className="flex flex-wrap items-center justify-center gap-4 text-[0.65rem] uppercase tracking-[0.3em] text-slate-300"
               aria-label="Primary"
             >
-              <ScrollLink
-                to="about"
-                smooth={true}
-                duration={500}
+              <a
+                href="#about"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.about}
-              </ScrollLink>
+              </a>
               <Link
                 href={`/${locale}/services`}
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.services}
               </Link>
-              <ScrollLink
-                to="projects"
-                smooth={true}
-                duration={500}
+              <a
+                href="#projects"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.projects}
-              </ScrollLink>
-              <ScrollLink
-                to="skills"
-                smooth={true}
-                duration={500}
+              </a>
+              <a
+                href="#skills"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.skills}
-              </ScrollLink>
-              <ScrollLink
-                to="certificates"
-                smooth={true}
-                duration={500}
+              </a>
+              <a
+                href="#certificates"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.certificates}
-              </ScrollLink>
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                duration={500}
+              </a>
+              <a
+                href="#contact"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.contact}
-              </ScrollLink>
+              </a>
             </nav>
-            <div
-              className="flex justify-center gap-2 md:justify-end"
-              role="group"
-              aria-label="Language"
-            >
-              {LOCALE_OPTIONS.map((option) => {
-                const isActive = locale === option.value;
-                return (
-                  <button
-                    key={option.value}
-                    type="button"
-                    onClick={() => handleLocaleChange(option.value, locale, "", router.push)}
-                    aria-pressed={isActive}
-                    className={`rounded-full border px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] transition ${isActive
-                      ? "border-emerald-200/70 bg-emerald-200/20 text-emerald-100"
-                      : "border-white/20 text-slate-200 hover:border-emerald-200/50 hover:text-emerald-100"
-                      }`}
-                  >
-                    {option.label}
-                  </button>
-                );
-              })}
-            </div>
+            <LocaleSwitcher locale={locale} />
           </div>
         </header>
 
@@ -264,14 +226,12 @@ export default function HomePage({
                     {copy.hero.ctaPrimary}
                     <span className="text-base transition group-hover:translate-x-1">→</span>
                   </Link>
-                  <ScrollLink
-                    to="contact"
-                    smooth={true}
-                    duration={500}
+                  <a
+                    href="#contact"
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-slate-200 transition hover:border-emerald-200/60 hover:text-emerald-100"
                   >
                     {copy.hero.ctaSecondary}
-                  </ScrollLink>
+                  </a>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {copy.hero.highlights.map((item) => (
@@ -570,14 +530,12 @@ export default function HomePage({
                 data-delay="80"
               >
                 {copy.certificates.notePrefix}{" "}
-                <ScrollLink
-                  to="contact"
-                  smooth={true}
-                  duration={500}
+                <a
+                  href="#contact"
                   className="text-emerald-200 transition hover:text-amber-200"
                 >
                   {copy.certificates.noteLink}
-                </ScrollLink>
+                </a>
                 {copy.certificates.noteSuffix}
               </p>
             </div>

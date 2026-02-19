@@ -1,6 +1,3 @@
-"use client";
-
-import { useMemo } from "react";
 import { makeStars } from "@/lib/random";
 
 interface StarfieldProps {
@@ -9,11 +6,10 @@ interface StarfieldProps {
 }
 
 export default function Starfield({ count = 120, seed = 123 }: StarfieldProps) {
-    const stars = useMemo(() => makeStars(count, seed), [count, seed]);
+    const stars = makeStars(count, seed);
     return (
         <div
             className="stars-background"
-            suppressHydrationWarning
             aria-hidden="true"
         >
             {stars.map((s, i) => (

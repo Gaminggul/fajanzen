@@ -1,12 +1,9 @@
-"use client";
-
-import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Starfield from "./Starfield";
-import { type Locale, LOCALE_OPTIONS, handleLocaleChange } from "@/lib/locale";
-import { useScrollReveal } from "@/lib/useScrollReveal";
 import ContactForm from "./ContactForm";
+import LocaleSwitcher from "./LocaleSwitcher";
+import ScrollRevealInit from "./ScrollRevealInit";
+import type { Locale } from "@/lib/locale";
 
 type ServicesCopy = {
   nav: {
@@ -77,12 +74,9 @@ export default function ServicesPage({
   footer: FooterCopy;
   locale: Locale;
 }) {
-  const router = useRouter();
-
-  useScrollReveal(locale);
-
   return (
     <div className="relative min-h-screen overflow-clip bg-[#050806] text-slate-100">
+      <ScrollRevealInit locale={locale} />
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(94,242,214,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(94,242,214,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(94,242,214,0.35),rgba(94,242,214,0))] blur-3xl" />
@@ -102,63 +96,32 @@ export default function ServicesPage({
               className="flex flex-wrap items-center justify-center gap-4 text-[0.65rem] uppercase tracking-[0.3em] text-slate-300"
               aria-label="Primary"
             >
-              <ScrollLink
-                to="packages"
-                smooth={true}
-                duration={500}
+              <a
+                href="#packages"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.packages}
-              </ScrollLink>
-              <ScrollLink
-                to="process"
-                smooth={true}
-                duration={500}
+              </a>
+              <a
+                href="#process"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.process}
-              </ScrollLink>
-              <ScrollLink
-                to="faq"
-                smooth={true}
-                duration={500}
+              </a>
+              <a
+                href="#faq"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.faq}
-              </ScrollLink>
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                duration={500}
+              </a>
+              <a
+                href="#contact"
                 className="cursor-pointer transition hover:text-emerald-200"
               >
                 {copy.nav.contact}
-              </ScrollLink>
+              </a>
             </nav>
-            <div
-              className="flex justify-center gap-2 md:justify-end"
-              role="group"
-              aria-label="Language"
-            >
-              {LOCALE_OPTIONS.map((option) => {
-                const isActive = locale === option.value;
-                return (
-                  <button
-                    key={option.value}
-                    type="button"
-                    onClick={() => handleLocaleChange(option.value, locale, "/services", router.push)}
-                    aria-pressed={isActive}
-                    className={`rounded-full border px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] transition ${
-                      isActive
-                        ? "border-emerald-200/70 bg-emerald-200/20 text-emerald-100"
-                        : "border-white/20 text-slate-200 hover:border-emerald-200/50 hover:text-emerald-100"
-                    }`}
-                  >
-                    {option.label}
-                  </button>
-                );
-              })}
-            </div>
+            <LocaleSwitcher locale={locale} path="/services" />
           </div>
         </header>
 
@@ -179,15 +142,13 @@ export default function ServicesPage({
                   {copy.hero.intro}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <ScrollLink
-                    to="contact"
-                    smooth={true}
-                    duration={500}
+                  <a
+                    href="#contact"
                     className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-200/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/20"
                   >
                     {copy.hero.ctaPrimary}
                     <span className="text-base transition group-hover:translate-x-1">→</span>
-                  </ScrollLink>
+                  </a>
                   <Link
                     href={`/${locale}#projects`}
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-slate-200 transition hover:border-emerald-200/60 hover:text-emerald-100"
