@@ -63,9 +63,9 @@ Production URL: [https://fajanzen.de](https://fajanzen.de)
 
 | Language | Percentage |
 |-----------|-------------|
-| TypeScript | 93.7 % |
-| JavaScript | 3.3 % |
-| CSS | 3.0 % |
+| TypeScript | 97.0 % |
+| CSS | 2.3 % |
+| JavaScript | 0.7 % |
 
 ---
 
