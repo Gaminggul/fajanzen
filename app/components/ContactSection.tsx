@@ -1,6 +1,6 @@
 "use client";
 
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useState } from "react";
 import type { IconType } from "react-icons";
 import { FaEnvelope, FaGithub, FaInstagram } from "react-icons/fa";
 
@@ -33,6 +33,15 @@ const contacts: Array<{
 ];
 
 export default function ContactSection({ copy }: { copy: ContactCopy }) {
+  const [copiedValue, setCopiedValue] = useState<string | null>(null);
+
+  function handleCopy(value: string) {
+    navigator.clipboard.writeText(value).then(() => {
+      setCopiedValue(value);
+      setTimeout(() => setCopiedValue(null), 2000);
+    });
+  }
+
   return (
     <section id="contact" className="border-t border-white/5 px-6 py-20">
       <div className="mx-auto max-w-6xl">
@@ -70,15 +79,14 @@ export default function ContactSection({ copy }: { copy: ContactCopy }) {
                             </p>
                           </div>
                         </div>
-                        <CopyToClipboard text={contact.value}>
-                          <button
-                            type="button"
-                            className="rounded-full border border-emerald-200/50 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/10"
-                            aria-label={`Copy ${contact.label}`}
-                          >
-                            {copy.ctaCopy}
-                          </button>
-                        </CopyToClipboard>
+                        <button
+                          type="button"
+                          onClick={() => handleCopy(contact.value)}
+                          className="rounded-full border border-emerald-200/50 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/10"
+                          aria-label={`Copy ${contact.label}`}
+                        >
+                          {copiedValue === contact.value ? "✓" : copy.ctaCopy}
+                        </button>
                       </div>
                     </div>
                   );
