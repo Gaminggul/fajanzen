@@ -36,7 +36,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       alternates: localeAlternates("/services"),
     })),
-    { url: `${baseUrl}/impressum`,   lastModified, changeFrequency: "yearly" as const, priority: 0.3 },
-    { url: `${baseUrl}/datenschutz`, lastModified, changeFrequency: "yearly" as const, priority: 0.3 },
   ];
 }

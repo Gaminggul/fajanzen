@@ -44,7 +44,7 @@ export function useScrollReveal(key: string) {
 
     const fallbackTimer = window.setTimeout(() => {
       elements.forEach((el) => el.classList.add("is-visible"));
-    }, 2000);
+    }, 1200);
 
     return () => {
       window.clearTimeout(fallbackTimer);

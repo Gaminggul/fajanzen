@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { isLocale, SUPPORTED_LOCALES } from "@/lib/locale";
 
 type PageProps = {
@@ -16,5 +16,5 @@ export const dynamicParams = false;
 export default async function OfferPage({ params }: PageProps) {
   const { locale } = await params;
   const target = isLocale(locale) ? `/${locale}/services` : "/en/services";
-  redirect(target);
+  permanentRedirect(target);
 }

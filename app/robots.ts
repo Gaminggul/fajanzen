@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/_next/", "/api/"],
+        disallow: ["/_next/"],
       },
     ],
     sitemap: "https://fajanzen.de/sitemap.xml",

@@ -37,7 +37,7 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-display);
+  font-family: var(--font-display), var(--font-body);
   letter-spacing: -0.02em;
 }
 
@@ -155,11 +155,24 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .fade-in,
   .rise-in,
   .reveal-up,
   .star {
     animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+  }
+
+  .card-lift {
     transition: none !important;
   }
 }

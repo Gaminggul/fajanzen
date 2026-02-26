@@ -71,19 +71,6 @@ export function proxy(request: NextRequest) {
     return res;
   }
 
-  if (host === "www.fajanzen.de") {
-    const url = request.nextUrl;
-    url.host = "fajanzen.de";
-    const res = NextResponse.redirect(url, 301);
-    if (shouldSetCookie) {
-      res.cookies.set(LOCALE_COOKIE, locale, {
-        path: "/",
-        maxAge: LOCALE_MAX_AGE,
-      });
-    }
-    return res;
-  }
-
   const res = NextResponse.next({
     request: { headers: withLocaleHeader(request, locale) },
   });
@@ -97,5 +84,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/:path*"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml|webmanifest)$).*)",
+  ],
 };

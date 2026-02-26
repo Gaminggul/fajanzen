@@ -3,11 +3,13 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { SEO } from "@/lib/site";
 import { LangSync } from "@/lib/LangSync";
+import { isLocale, DEFAULT_LOCALE, LOCALE_HEADER } from "@/lib/locale";
 
 const bodyFont = IBM_Plex_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   weight: ["400", "600"],
   variable: "--font-body",
   display: "swap",
@@ -51,13 +53,26 @@ export const viewport: Viewport = {
   themeColor: "#050806",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headerStore = await headers();
+  const localeHeader = headerStore.get(LOCALE_HEADER);
+  const lang = isLocale(localeHeader) ? localeHeader : DEFAULT_LOCALE;
+
   return (
-    <html lang="en">
+    <html lang={lang}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      </head>
       <body
         className={`${bodyFont.variable} ${displayFont.variable} overflow-x-hidden bg-[#050806] text-slate-100`}
       >

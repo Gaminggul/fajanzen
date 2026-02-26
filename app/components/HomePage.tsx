@@ -101,6 +101,12 @@ type HomeCopy = {
       messagePlaceholder: string;
       submitLabel: string;
       orDirect: string;
+      nameRequired: string;
+      emailRequired: string;
+      emailInvalid: string;
+      messageRequired: string;
+      messageMinLength: string;
+      submitted: string;
     };
   };
   footer: {
@@ -199,7 +205,7 @@ export default function HomePage({
         </header>
 
         <main id="content" tabIndex={-1}>
-          <section className="relative overflow-hidden px-6 pb-20 pt-16 md:pt-24">
+          <section aria-label={copy.hero.role} className="relative overflow-hidden px-6 pb-20 pt-16 md:pt-24">
             <div className="absolute inset-0 opacity-40">
               <Starfield count={120} seed={123} />
             </div>
@@ -224,7 +230,7 @@ export default function HomePage({
                     className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/70 bg-emerald-200/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-emerald-100 transition hover:border-emerald-200 hover:bg-emerald-200/20"
                   >
                     {copy.hero.ctaPrimary}
-                    <span className="text-base transition group-hover:translate-x-1">→</span>
+                    <span className="text-base transition group-hover:translate-x-1" aria-hidden="true">→</span>
                   </Link>
                   <a
                     href="#contact"
@@ -566,13 +572,13 @@ export default function HomePage({
             <p>{copy.footer.copyright}</p>
             <div className="flex gap-4">
               <Link
-                href="/impressum"
+                href={`/${locale}/impressum`}
                 className="transition hover:text-emerald-200"
               >
                 {copy.footer.imprint}
               </Link>
               <Link
-                href="/datenschutz"
+                href={`/${locale}/datenschutz`}
                 className="transition hover:text-emerald-200"
               >
                 {copy.footer.privacy}
