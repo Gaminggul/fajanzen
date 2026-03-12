@@ -252,6 +252,17 @@ export const TRANSLATIONS = {
             },
           ],
         },
+        {
+          title: "Hardware Manager",
+          description:
+            "Verteiltes Linux-Server-Monitoring: Python-Agent pro Maschine, Next.js-Dashboard für CPU, RAM, GPU, Temperatur und mehr — live aktualisiert.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/hardware-manager",
+            },
+          ],
+        },
       ],
     },
     contact: {
@@ -428,6 +439,17 @@ export const TRANSLATIONS = {
             },
           ],
         },
+        {
+          title: "Hardware Manager",
+          description:
+            "Distributed Linux server monitoring: lightweight Python agent per machine, Next.js dashboard for CPU, RAM, GPU, temperatures, and more — live auto-refresh.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/hardware-manager",
+            },
+          ],
+        },
       ],
     },
     contact: {
@@ -600,6 +622,17 @@ export const TRANSLATIONS = {
             {
               label: "GitHub",
               url: "https://github.com/Gaminggul/KnowUnity-PDF-Downloader",
+            },
+          ],
+        },
+        {
+          title: "Hardware Manager",
+          description:
+            "Распределённый мониторинг Linux-серверов: лёгкий Python-агент на каждой машине, Next.js-дашборд для CPU, RAM, GPU, температур и не только — с авто-обновлением.",
+          links: [
+            {
+              label: "GitHub",
+              url: "https://github.com/Gaminggul/hardware-manager",
             },
           ],
         },
