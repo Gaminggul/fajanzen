@@ -226,7 +226,7 @@ export const TRANSLATIONS = {
           focus: "Web Game",
           tags: ["Game Logic", "UI", "Web"],
           links: [
-            { label: "GitHub", url: "https://github.com/Gaminggul/PokerOnline" },
+            { label: "GitHub", url: "https://github.com/Gaminggul/PokerCat" },
           ],
         },
       ],
