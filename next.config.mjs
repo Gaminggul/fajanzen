@@ -24,6 +24,9 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
+  turbopack: {
+    root: import.meta.dirname,
+  },
   async headers() {
     return [
       {
